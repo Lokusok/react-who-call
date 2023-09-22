@@ -4,7 +4,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Grid, Link, Box } from '@mui/material';
 
 import Logo from '../../Logo';
-import NavBar from '../../NavBar';
+import NavBar from '../NavBar';
 
 const HeaderItems = () => {
   return (

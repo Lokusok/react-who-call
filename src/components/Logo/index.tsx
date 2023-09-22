@@ -3,7 +3,7 @@ import CallIcon from '@mui/icons-material/Call';
 
 const Logo = () => {
   return (
-    <Typography
+    <Box
       sx={{
         display: 'flex',
         alignItems: 'flex-end',
@@ -27,7 +27,7 @@ const Logo = () => {
         <CallIcon fontSize="small" color="primary" />
       </Box>
       Звонили
-    </Typography>
+    </Box>
   );
 };
 

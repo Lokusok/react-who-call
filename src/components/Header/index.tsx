@@ -1,21 +1,14 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
-import {
-  AppBar,
-  Container,
-  Link,
-  Grid,
-  Menu,
-  MenuList,
-  MenuItem,
-  Box,
-} from '@mui/material';
+import { AppBar, Container, Link, Grid, Menu, MenuItem } from '@mui/material';
 
 import HeaderItems from './HeaderItems';
-import Burger from '../Burger';
+import Burger from './Burger';
+import NavLink from './NavLink';
+import MobileMenu from '../MobileMenu';
 
-const Header = () => {
+const Header = React.forwardRef((props, ref: React.Ref<HTMLElement>) => {
   const [visibleMenu, setVisibleMenu] = React.useState(false);
 
   const clickOnBurger = () => {
@@ -27,49 +20,24 @@ const Header = () => {
   };
 
   return (
-    <AppBar sx={{ py: 2, position: 'fixed' }} elevation={0}>
+    <AppBar ref={ref} sx={{ py: 2 }} position="fixed" elevation={0}>
       <Container>
         <Grid container justifyContent="space-between" alignItems="center">
           <Grid item>
             <HeaderItems />
           </Grid>
 
-          <Grid item>
-            <Link
-              component={RouterLink}
-              to="/login"
-              fontSize="14px"
-              underline="hover"
-              sx={{ display: { xs: 'none', sm: 'initial' } }}
-            >
-              Войти
-            </Link>
+          <Grid item sx={{ display: { xs: 'none', sm: 'initial' } }}>
+            <NavLink to="/login">Войти</NavLink>
           </Grid>
 
           <Burger onClick={clickOnBurger} />
         </Grid>
       </Container>
 
-      <Menu
-        open={visibleMenu}
-        PaperProps={{ style: { top: 'auto', right: 0 } }}
-        MenuListProps={{ style: { padding: 0 } }}
-        onClose={handleClose}
-        sx={{
-          '& .MuiMenu-root': { backgroundColor: 'red' },
-          '& .MuiPaper-root': {
-            left: '0 !important',
-            maxWidth: '100% !important',
-          },
-          marginTop: '83px',
-          height: '300px',
-        }}
-      >
-        <MenuItem onClick={handleClose}>Главная</MenuItem>
-        <MenuItem onClick={handleClose}>Список кодов</MenuItem>
-      </Menu>
+      <MobileMenu visibleMenu={visibleMenu} handleClose={handleClose} />
     </AppBar>
   );
-};
+});
 
 export default Header;
