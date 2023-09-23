@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Link as RouterLink } from 'react-router-dom';
 
-import { Typography, Box, Grid, Avatar, Link } from '@mui/material';
+import { Typography, Box, Grid, Avatar, Link, Stack } from '@mui/material';
 import { deepOrange, grey } from '@mui/material/colors';
 
 import { IComment } from '../../types';
@@ -41,62 +41,48 @@ const Comment: React.FC<CommentProps> = ({
         >
           <Grid container justifyContent="space-between">
             <Grid item>
-              <Grid container spacing={0.7} alignItems="center">
-                <Grid item>
-                  <Avatar
-                    variant="rounded"
-                    sx={{
-                      width: 25,
-                      height: 25,
-                      bgcolor: deepOrange[500],
-                      fontSize: 18,
-                    }}
-                  >
-                    {username[0].toUpperCase()}
-                  </Avatar>
-                </Grid>
+              <Stack direction="row" spacing={0.7} alignItems="center">
+                <Avatar
+                  variant="rounded"
+                  sx={{
+                    width: 25,
+                    height: 25,
+                    bgcolor: deepOrange[500],
+                    fontSize: 18,
+                  }}
+                >
+                  {username[0].toUpperCase()}
+                </Avatar>
 
-                <Grid item>
-                  <Typography fontWeight={700}>{username}</Typography>
-                </Grid>
+                <Typography fontWeight={700}>{username}</Typography>
 
-                <Grid item sx={{ marginLeft: '5px' }}>
-                  <Grid container spacing={0.5}>
-                    <Grid item>
-                      <Typography fontSize={13}>{date}</Typography>
-                    </Grid>
+                <Box sx={{ marginLeft: '5px' }}>
+                  <Stack direction="row" spacing={0.5}>
+                    <Typography fontSize={13}>{date}</Typography>
 
-                    <Grid item>
-                      <Typography fontSize={13}>{time}</Typography>
-                    </Grid>
-                  </Grid>
-                </Grid>
-              </Grid>
+                    <Typography fontSize={13}>{time}</Typography>
+                  </Stack>
+                </Box>
+              </Stack>
             </Grid>
 
-            <Grid item>
-              <Grid container alignItems="center" spacing={1}>
-                <Grid item>
-                  <Link
-                    component={RouterLink}
-                    to="/tel"
-                    color="primary"
-                    fontSize={14}
-                    fontWeight={900}
-                    underline="hover"
-                  >
-                    {telNumber}
-                  </Link>
-                </Grid>
+            <Grid item sx={{ marginLeft: 'auto' }}>
+              <Stack direction="row" alignItems="center" spacing={1}>
+                <Link
+                  component={RouterLink}
+                  to="/tel"
+                  color="primary"
+                  fontSize={14}
+                  fontWeight={900}
+                  underline="hover"
+                >
+                  {telNumber}
+                </Link>
 
-                <Grid item>
-                  <ViewsCount count={viewsCount} />
-                </Grid>
+                <ViewsCount count={viewsCount} />
 
-                <Grid item>
-                  <CommentsCount count={commentsCount} />
-                </Grid>
-              </Grid>
+                <CommentsCount count={commentsCount} />
+              </Stack>
             </Grid>
           </Grid>
         </Grid>

@@ -9,13 +9,21 @@ import Sidebar from '../../components/Sidebar';
 const Entire = () => {
   return (
     <Container>
-      <Grid container spacing={5} sx={{ paddingTop: '20px' }}>
+      <Grid
+        container
+        columnSpacing={5}
+        rowSpacing={0}
+        sx={{
+          paddingTop: '20px',
+          justifyContent: { xs: 'center', md: 'stretch' },
+        }}
+      >
         <Grid item xs={12} md={8}>
           <Welcome />
           <LastComments />
         </Grid>
 
-        <Grid item md={4}>
+        <Grid item md={4} sx={{ marginBottom: { xs: '2rem', md: 0 } }}>
           <Sidebar />
         </Grid>
       </Grid>

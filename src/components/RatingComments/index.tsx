@@ -32,11 +32,11 @@ const RatingComments: React.FC<RatingCommentsProps> = ({ title, numbers }) => {
               '& .MuiBox-root': {
                 borderTop: 'none',
               },
-              '& .MuiGrid-root:first-child .MuiBox-root': {
+              '& .MuiGrid-root:first-child > .MuiBox-root': {
                 borderRadius: '5px 5px 0 0',
                 borderTop: `1px solid ${grey[400]}`,
               },
-              '& .MuiGrid-root:last-child .MuiBox-root': {
+              '& .MuiGrid-root:last-child > .MuiBox-root': {
                 borderRadius: '0 0 5px 5px',
               },
             }}

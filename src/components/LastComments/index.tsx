@@ -3,6 +3,7 @@ import React from 'react';
 import { Container, Typography, Box, Grid } from '@mui/material';
 
 import Comment from '../Comment';
+import Pagination from '../Pagination';
 
 import { dataComments } from '../../api/mock';
 
@@ -30,7 +31,16 @@ const LastComments: React.FC = () => {
         ))}
       </Grid>
 
-      {/* Пагинация */}
+      <Box
+        sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '2rem',
+          marginBottom: '0.3rem',
+        }}
+      >
+        <Pagination />
+      </Box>
     </Box>
   );
 };
