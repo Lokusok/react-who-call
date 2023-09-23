@@ -4,17 +4,20 @@ import { Container, Grid } from '@mui/material';
 
 import Welcome from '../../components/Welcome';
 import LastComments from '../../components/LastComments';
+import Sidebar from '../../components/Sidebar';
 
 const Entire = () => {
   return (
     <Container>
-      <Grid container sx={{ paddingTop: '15px' }}>
-        <Grid item xs={12} md={9}>
+      <Grid container spacing={5} sx={{ paddingTop: '20px' }}>
+        <Grid item xs={12} md={8}>
           <Welcome />
           <LastComments />
         </Grid>
 
-        <Grid item md={3}></Grid>
+        <Grid item md={4}>
+          <Sidebar />
+        </Grid>
       </Grid>
     </Container>
   );
