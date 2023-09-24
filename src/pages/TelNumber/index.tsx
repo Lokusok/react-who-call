@@ -31,11 +31,11 @@ const TelNumber: React.FC = () => {
       </Typography>
 
       <Typography fontSize={15} sx={{ marginBottom: '1rem' }}>
-        <Typography component="strong" fontWeight={700}>
+        <Typography component="strong" fontSize={15} fontWeight={700}>
           Кто звонил по номеру +7{telNumber}
         </Typography>{' '}
         или 8{telNumber}? Узнайте информацию по звонкам с номера телефона{' '}
-        <Typography component="strong" fontWeight={700}>
+        <Typography component="strong" fontSize={15} fontWeight={700}>
           {internationalFormat}
         </Typography>
         .
@@ -80,8 +80,12 @@ const TelNumber: React.FC = () => {
         </Typography>
       </Box>
 
-      <Box>
+      <Box sx={{ marginBottom: '2rem' }}>
         <ReviewAddForm />
+      </Box>
+
+      <Box>
+        <Typography fontSize={20}>Отзывы по номеру +7{telNumber}</Typography>
       </Box>
     </Box>
   );
