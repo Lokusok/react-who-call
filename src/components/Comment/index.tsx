@@ -70,7 +70,7 @@ const Comment: React.FC<CommentProps> = ({
               <Stack direction="row" alignItems="center" spacing={1}>
                 <Link
                   component={RouterLink}
-                  to="/tel"
+                  to={`/tel/${telNumber}`}
                   color="primary"
                   fontSize={14}
                   fontWeight={900}

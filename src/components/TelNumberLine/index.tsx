@@ -31,7 +31,7 @@ const TelNumberLine: React.FC<TelNumberLineProps> = ({
         <Grid item>
           <Link
             component={RouterLink}
-            to="/tel"
+            to={`/tel/${telNumber}`}
             color="primary"
             underline="hover"
             sx={{

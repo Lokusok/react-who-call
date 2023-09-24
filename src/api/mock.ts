@@ -1,4 +1,4 @@
-import { IComment, ITelNumberLine } from '../types';
+import { IComment, ITelNumberLine, INewReview } from '../types';
 
 export const dataComments: IComment[] = [
   {
@@ -121,5 +121,35 @@ export const lastCheckedNumbers: ITelNumberLine[] = [
     telNumber: '9209466521',
     viewsCount: 5,
     commentsCount: 1,
+  },
+];
+
+export const newReviews: INewReview[] = [
+  {
+    telNumber: '+79672163843',
+    category: null,
+    commentsCount: 3,
+    reviewText: 'Воскресный звонок. В трубке - гудки.',
+  },
+
+  {
+    telNumber: '+73472324018',
+    category: 'Реклама',
+    commentsCount: 1,
+    reviewText: 'Ростелеком робот',
+  },
+
+  {
+    telNumber: '+79274064037',
+    category: 'Мошенники',
+    commentsCount: 1,
+    reviewText: 'Бросили трубку, тюремные вымогатели херовы.',
+  },
+
+  {
+    telNumber: '+79250414178',
+    category: null,
+    commentsCount: 2,
+    reviewText: 'Предлагают работу',
   },
 ];

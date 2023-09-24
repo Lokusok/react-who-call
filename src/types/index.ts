@@ -16,3 +16,11 @@ export interface ITelNumberLine {
   viewsCount: number;
   commentsCount: number;
 }
+
+export interface INewReview {
+  id?: number;
+  telNumber: string;
+  category: string | null;
+  commentsCount: number;
+  reviewText: string;
+}

@@ -9,7 +9,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import useChangeHeight from './hooks/useChangeHeight';
 
+import Main from './layouts/Main';
+
 import Entire from './pages/Entire';
+import TelNumber from './pages/TelNumber';
 import Footer from './components/Footer';
 
 const globStyles = {
@@ -32,8 +35,11 @@ const App: React.FC = () => {
           <Search />
 
           <Routes>
-            <Route path="/main" element={<Entire />} />
-            <Route path="/" element={<Entire />} />
+            <Route path="/" element={<Main />}>
+              <Route path="" element={<Entire />} />
+              <Route path="main" element={<Entire />} />
+              <Route path="tel/:telNumber" element={<TelNumber />} />
+            </Route>
           </Routes>
         </Box>
 
