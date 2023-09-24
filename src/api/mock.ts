@@ -153,3 +153,50 @@ export const newReviews: INewReview[] = [
     reviewText: 'Предлагают работу',
   },
 ];
+
+export const chartData = [
+  {
+    name: 'Январь',
+    reviewsCount: 2,
+  },
+  {
+    name: 'Февраль',
+    reviewsCount: 5,
+  },
+  {
+    name: 'Март',
+    reviewsCount: 1,
+  },
+  {
+    name: 'Апрель',
+    reviewsCount: 4,
+  },
+  {
+    name: 'Май',
+    reviewsCount: 7,
+  },
+  {
+    name: 'Июнь',
+    reviewsCount: 3,
+  },
+  {
+    name: 'Август',
+    reviewsCount: 10,
+  },
+  {
+    name: 'Сентябрь',
+    reviewsCount: 2,
+  },
+  {
+    name: 'Октябрь',
+    reviewsCount: 1,
+  },
+  {
+    name: 'Ноябрь',
+    reviewsCount: 5,
+  },
+  {
+    name: 'Декабрь',
+    reviewsCount: 6,
+  },
+];

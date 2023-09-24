@@ -8,6 +8,8 @@ import TelNumberTable from '../../components/TelNumberTable';
 import InfoBlock from './components/InfoBlock';
 
 import parsePhoneNumber from 'libphonenumber-js';
+import Activity from './components/Activity';
+import ReviewAddForm from '../../components/ReviewAddForm';
 
 const TelNumber: React.FC = () => {
   const params = useParams();
@@ -63,11 +65,23 @@ const TelNumber: React.FC = () => {
         </InfoBlock>
       </Box>
 
-      <Box>
-        <Typography fontSize={24} fontWeight={400}>
-          Активность номера +7{telNumber}
-          {/* Здесь должен быть график */}
+      <Box sx={{ marginBottom: '1rem' }}>
+        <Activity title={`Активность номера +7${telNumber}`} />
+      </Box>
+
+      <Box sx={{ marginBottom: '1rem' }}>
+        <Typography fontSize={15}>
+          Если Вам звонили с номера{' '}
+          <Typography component="strong" fontSize={15} fontWeight={700}>
+            {internationalFormat}
+          </Typography>{' '}
+          - оставьте свой отзыв по этому номеру. Благодаря этому другие
+          пользователи смогут видеть самую актуальную телефонную базу номеров
         </Typography>
+      </Box>
+
+      <Box>
+        <ReviewAddForm />
       </Box>
     </Box>
   );

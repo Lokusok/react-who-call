@@ -13,7 +13,7 @@ const Main: React.FC = () => {
   const { telNumber } = params;
 
   return (
-    <Container>
+    <Container component="main">
       <Grid
         container
         columnSpacing={5}
