@@ -38,7 +38,7 @@ const App: React.FC = () => {
 
           <Routes>
             <Route path="/" element={<Main />}>
-              <Route path="" element={<Entire />} />
+              <Route index element={<Entire />} />
               <Route path="main" element={<Entire />} />
               <Route path="tel/:telNumber" element={<TelNumber />} />
               <Route path="/rules" element={<Rules />} />
