@@ -79,9 +79,13 @@ const Comment: React.FC<CommentProps> = ({
                   {telNumber}
                 </Link>
 
-                <ViewsCount count={viewsCount} />
+                {Boolean(viewsCount) && (
+                  <ViewsCount count={viewsCount as number} />
+                )}
 
-                <CommentsCount count={commentsCount} />
+                {Boolean(commentsCount) && (
+                  <CommentsCount count={commentsCount as number} />
+                )}
               </Stack>
             </Grid>
           </Grid>

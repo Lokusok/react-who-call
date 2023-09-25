@@ -2,9 +2,6 @@ import React from 'react';
 
 import { GlobalStyles, Box, CssBaseline } from '@mui/material';
 
-import Header from './components/Header';
-import Search from './components/Search';
-
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import useChangeHeight from './hooks/useChangeHeight';
@@ -13,7 +10,12 @@ import Main from './layouts/Main';
 
 import Entire from './pages/Entire';
 import TelNumber from './pages/TelNumber';
+import Rules from './pages/Rules';
+import Contacts from './pages/Contacts';
+
+import Header from './components/Header';
 import Footer from './components/Footer';
+import Search from './components/Search';
 
 const globStyles = {
   body: { minHeight: '100vh' },
@@ -39,6 +41,8 @@ const App: React.FC = () => {
               <Route path="" element={<Entire />} />
               <Route path="main" element={<Entire />} />
               <Route path="tel/:telNumber" element={<TelNumber />} />
+              <Route path="/rules" element={<Rules />} />
+              <Route path="/contacts" element={<Contacts />} />
             </Route>
           </Routes>
         </Box>

@@ -3,9 +3,9 @@ export interface IComment {
   username: string;
   date: string;
   time: string;
-  telNumber: string;
-  viewsCount: number;
-  commentsCount: number;
+  telNumber?: string;
+  viewsCount?: number;
+  commentsCount?: number;
   description: string;
   category: string | null;
 }

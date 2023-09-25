@@ -12,6 +12,10 @@ const Main: React.FC = () => {
   const params = useParams();
   const { telNumber } = params;
 
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  });
+
   return (
     <Container component="main">
       <Grid

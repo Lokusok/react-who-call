@@ -126,28 +126,28 @@ export const lastCheckedNumbers: ITelNumberLine[] = [
 
 export const newReviews: INewReview[] = [
   {
-    telNumber: '+79672163843',
+    telNumber: '9672163843',
     category: null,
     commentsCount: 3,
     reviewText: 'Воскресный звонок. В трубке - гудки.',
   },
 
   {
-    telNumber: '+73472324018',
+    telNumber: '3472324018',
     category: 'Реклама',
     commentsCount: 1,
     reviewText: 'Ростелеком робот',
   },
 
   {
-    telNumber: '+79274064037',
+    telNumber: '9274064037',
     category: 'Мошенники',
     commentsCount: 1,
     reviewText: 'Бросили трубку, тюремные вымогатели херовы.',
   },
 
   {
-    telNumber: '+79250414178',
+    telNumber: '9250414178',
     category: null,
     commentsCount: 2,
     reviewText: 'Предлагают работу',
@@ -200,3 +200,30 @@ export const chartData = [
     reviewsCount: 6,
   },
 ];
+
+export const mockReviews: Record<string, IComment[]> = {
+  '9587137815': [
+    {
+      username: 'Анна',
+      date: '23.09.2023',
+      time: '17:47',
+      telNumber: '3852631066',
+      viewsCount: 4,
+      commentsCount: 1,
+      description:
+        'Не знаю позвонили и попросили паспортные данные представились сотрудниками компании Теле2,якобы каждый год надо подтверждать данные,м месяца три назад подтверждали в офисе теле 2.послала на хутур бабочек ловить.',
+      category: 'Опросы',
+    },
+    {
+      username: 'Анна',
+      date: '23.09.2023',
+      time: '17:47',
+      telNumber: '3852631066',
+      viewsCount: 4,
+      commentsCount: 1,
+      description:
+        'Не знаю позвонили и попросили паспортные данные представились сотрудниками компании Теле2,якобы каждый год надо подтверждать данные,м месяца три назад подтверждали в офисе теле 2.послала на хутур бабочек ловить.',
+      category: 'Опросы',
+    },
+  ],
+};

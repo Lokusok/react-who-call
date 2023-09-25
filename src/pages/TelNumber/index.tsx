@@ -2,19 +2,33 @@ import React from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import { Typography, Box } from '@mui/material';
+import { Typography, Box, Alert } from '@mui/material';
 
 import TelNumberTable from '../../components/TelNumberTable';
 import InfoBlock from './components/InfoBlock';
 
 import parsePhoneNumber from 'libphonenumber-js';
+
 import Activity from './components/Activity';
 import ReviewAddForm from '../../components/ReviewAddForm';
+import ReviewsList from '../../components/ReviewsList';
 
 const TelNumber: React.FC = () => {
-  const params = useParams();
+  const params = useParams<{ telNumber: string }>();
   const { telNumber } = params;
   const phoneNumber = parsePhoneNumber(telNumber as string, 'RU');
+  const isValidNumber = phoneNumber?.isValid();
+
+  if (!isValidNumber) {
+    return (
+      <Alert severity="error">
+        <Typography fontSize="inherit" component="span" fontWeight={700}>
+          Ошибка!
+        </Typography>{' '}
+        Неправильный формат номера. Попробуйте еще раз
+      </Alert>
+    );
+  }
 
   const internationalFormat = phoneNumber?.formatInternational();
   const nationalFormat = phoneNumber?.formatNational();
@@ -85,7 +99,7 @@ const TelNumber: React.FC = () => {
       </Box>
 
       <Box>
-        <Typography fontSize={20}>Отзывы по номеру +7{telNumber}</Typography>
+        <ReviewsList telNumber={telNumber as string} />
       </Box>
     </Box>
   );
