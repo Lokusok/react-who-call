@@ -6,11 +6,11 @@ import Comment from '../Comment';
 
 import { mockReviews } from '../../api/mock';
 
-interface ReviewsListProps {
+interface CommentsListProps {
   telNumber: string;
 }
 
-const ReviewsList: React.FC<ReviewsListProps> = ({ telNumber }) => {
+const CommentsList: React.FC<CommentsListProps> = ({ telNumber }) => {
   const reviews = mockReviews[telNumber];
 
   return (
@@ -46,4 +46,4 @@ const ReviewsList: React.FC<ReviewsListProps> = ({ telNumber }) => {
   );
 };
 
-export default ReviewsList;
+export default CommentsList;

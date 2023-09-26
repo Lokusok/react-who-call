@@ -9,15 +9,13 @@ import {
   Grid,
   Stack,
   Select,
-  Menu,
-  MenuItem,
   InputLabel,
   Rating,
   Button,
 } from '@mui/material';
 import { blue } from '@mui/material/colors';
 
-const ReviewAddForm: React.FC = () => {
+const CommentAddForm: React.FC = () => {
   return (
     <Box sx={{ border: `1px solid ${blue[700]}`, borderRadius: '5px' }}>
       <Box sx={{ padding: '0.5rem 1rem', backgroundColor: blue[700] }}>
@@ -27,7 +25,11 @@ const ReviewAddForm: React.FC = () => {
       </Box>
 
       <Box sx={{ padding: '0.5rem 1rem', paddingBottom: '1.5rem' }}>
-        <Grid container columnSpacing={12} rowSpacing={3}>
+        <Grid
+          container
+          columnSpacing={{ xs: 0, sm: 2, md: 6, lg: 12 }}
+          rowSpacing={3}
+        >
           <Grid item xs={12}>
             <Stack direction="column">
               <FormLabel
@@ -39,6 +41,7 @@ const ReviewAddForm: React.FC = () => {
 
               <TextField
                 multiline
+                id="comment"
                 name="comment"
                 variant="outlined"
                 placeholder={'Ваш комментарий'}
@@ -53,12 +56,13 @@ const ReviewAddForm: React.FC = () => {
             </Stack>
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Stack direction="row" alignItems="center" spacing={4}>
               <FormLabel htmlFor="username">Имя:</FormLabel>
 
               <FormControl fullWidth>
                 <TextField
+                  id="username"
                   name="username"
                   placeholder="Имя"
                   sx={{ '& .MuiInputBase-root': { padding: '0.75rem' } }}
@@ -73,9 +77,12 @@ const ReviewAddForm: React.FC = () => {
             </Stack>
           </Grid>
 
-          <Grid item xs={6}>
+          <Grid item xs={12} sm={6}>
             <Stack direction="row" alignItems="center" spacing={4}>
-              <FormLabel htmlFor="username" sx={{ whiteSpace: 'nowrap' }}>
+              <FormLabel
+                htmlFor="category-call-select"
+                sx={{ whiteSpace: 'nowrap' }}
+              >
                 Тип звонка:
               </FormLabel>
 
@@ -124,4 +131,4 @@ const ReviewAddForm: React.FC = () => {
   );
 };
 
-export default ReviewAddForm;
+export default CommentAddForm;

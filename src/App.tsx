@@ -12,6 +12,9 @@ import Entire from './pages/Entire';
 import TelNumber from './pages/TelNumber';
 import Rules from './pages/Rules';
 import Contacts from './pages/Contacts';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import ForgetPassword from './pages/ForgetPassword';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -42,8 +45,12 @@ const App: React.FC = () => {
               <Route path="main" element={<Entire />} />
               <Route path="tel/:telNumber" element={<TelNumber />} />
               <Route path="/rules" element={<Rules />} />
-              <Route path="/contacts" element={<Contacts />} />
+              <Route path="contacts" element={<Contacts />} />
             </Route>
+
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/forget_password" element={<ForgetPassword />} />
           </Routes>
         </Box>
 

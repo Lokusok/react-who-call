@@ -10,8 +10,8 @@ import InfoBlock from './components/InfoBlock';
 import parsePhoneNumber from 'libphonenumber-js';
 
 import Activity from './components/Activity';
-import ReviewAddForm from '../../components/ReviewAddForm';
-import ReviewsList from '../../components/ReviewsList';
+import CommentAddForm from '../../components/CommentAddForm';
+import CommentsList from '../../components/CommentsList';
 
 const TelNumber: React.FC = () => {
   const params = useParams<{ telNumber: string }>();
@@ -95,11 +95,11 @@ const TelNumber: React.FC = () => {
       </Box>
 
       <Box sx={{ marginBottom: '2rem' }}>
-        <ReviewAddForm />
+        <CommentAddForm />
       </Box>
 
       <Box>
-        <ReviewsList telNumber={telNumber as string} />
+        <CommentsList telNumber={telNumber as string} />
       </Box>
     </Box>
   );

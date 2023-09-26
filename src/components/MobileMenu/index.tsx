@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Menu, MenuItem } from '@mui/material';
+import { Link as RouterLink } from 'react-router-dom';
+import { Menu, MenuItem, Link } from '@mui/material';
 
 interface MobileMenuProps {
   visibleMenu: boolean;
@@ -27,8 +28,12 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
         height: '300px',
       }}
     >
-      <MenuItem onClick={handleClose}>Главная</MenuItem>
-      <MenuItem onClick={handleClose}>Список кодов</MenuItem>
+      <Link component={RouterLink} to="/main" color="black">
+        <MenuItem onClick={handleClose}>Главная</MenuItem>
+      </Link>
+      <Link component={RouterLink} to="/codes" color="black">
+        <MenuItem onClick={handleClose}>Список кодов</MenuItem>
+      </Link>
     </Menu>
   );
 };
