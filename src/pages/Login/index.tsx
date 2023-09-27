@@ -1,16 +1,13 @@
 import React from 'react';
 
-import { Container, Box } from '@mui/material';
-
 import LoginForm from './LoginForm';
+import Enter from '../components/Enter';
 
 const Login: React.FC = () => {
   return (
-    <Container>
-      <Box sx={{ paddingTop: '1.5rem' }}>
-        <LoginForm />
-      </Box>
-    </Container>
+    <Enter>
+      <LoginForm />
+    </Enter>
   );
 };
 

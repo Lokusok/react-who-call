@@ -1,16 +1,13 @@
 import React from 'react';
 
-import { Container, Box } from '@mui/material';
-
 import ForgetForm from './ForgetForm';
+import Enter from '../components/Enter';
 
 const ForgetPassword: React.FC = () => {
   return (
-    <Container>
-      <Box sx={{ paddingTop: '1.5rem' }}>
-        <ForgetForm />
-      </Box>
-    </Container>
+    <Enter>
+      <ForgetForm />
+    </Enter>
   );
 };
 
