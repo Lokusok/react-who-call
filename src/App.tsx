@@ -20,6 +20,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import Search from './components/Search';
 
+import Enter from './pages/components/Enter';
+
 const globStyles = {
   body: { minHeight: '100vh' },
   '#root': { minHeight: '100vh', display: 'flex', flexDirection: 'column' },
@@ -48,9 +50,11 @@ const App: React.FC = () => {
               <Route path="contacts" element={<Contacts />} />
             </Route>
 
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/forget_password" element={<ForgetPassword />} />
+            <Route path="/" element={<Enter />}>
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/forget_password" element={<ForgetPassword />} />
+            </Route>
           </Routes>
         </Box>
 
