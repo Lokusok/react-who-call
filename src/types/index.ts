@@ -1,5 +1,5 @@
 export interface IComment {
-  id?: number;
+  id: number;
   username: string;
   date: string;
   time: string;
@@ -11,16 +11,21 @@ export interface IComment {
 }
 
 export interface ITelNumberLine {
-  id?: number;
+  id: number;
   telNumber: string;
   viewsCount: number;
   commentsCount: number;
 }
 
 export interface INewReview {
-  id?: number;
+  id: number;
   telNumber: string;
   category: string | null;
   commentsCount: number;
   reviewText: string;
+}
+
+export interface IStatisticPoint {
+  name: string;
+  reviewsCount: number;
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Typography, Box, Grid } from '@mui/material';
+import { Typography, Box, Grid } from '@mui/material';
 
 import Comment from '../Comment';
 import Pagination from '../Pagination';
@@ -16,17 +16,8 @@ const LastComments: React.FC = () => {
 
       <Grid container direction="column" spacing={2.5}>
         {dataComments.map((commData) => (
-          <Grid item>
-            <Comment
-              username={commData.username}
-              date={commData.date}
-              time={commData.time}
-              telNumber={commData.telNumber}
-              viewsCount={commData.viewsCount}
-              commentsCount={commData.commentsCount}
-              description={commData.description}
-              category={commData.category}
-            />
+          <Grid item key={commData.id}>
+            <Comment {...commData} />
           </Grid>
         ))}
       </Grid>

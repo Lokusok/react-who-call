@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
 
-import { AppBar, Container, Link, Grid, Menu, MenuItem } from '@mui/material';
+import { AppBar, Container, Grid } from '@mui/material';
 
 import HeaderItems from './HeaderItems';
 import Burger from './Burger';

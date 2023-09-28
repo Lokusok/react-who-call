@@ -1,7 +1,13 @@
-import { IComment, ITelNumberLine, INewReview } from '../types';
+import {
+  IComment,
+  ITelNumberLine,
+  INewReview,
+  IStatisticPoint,
+} from '../types';
 
 export const dataComments: IComment[] = [
   {
+    id: 1,
     username: 'Анна',
     date: '23.09.2023',
     time: '17:47',
@@ -13,6 +19,7 @@ export const dataComments: IComment[] = [
     category: 'Опросы',
   },
   {
+    id: 2,
     username: 'Елена',
     date: '23.09.2023',
     time: '17:42',
@@ -23,6 +30,7 @@ export const dataComments: IComment[] = [
     category: null,
   },
   {
+    id: 3,
     username: 'Лина',
     date: '23.09.2023',
     time: '17:38',
@@ -33,6 +41,7 @@ export const dataComments: IComment[] = [
     category: null,
   },
   {
+    id: 4,
     username: 'Анна',
     date: '23.09.2023',
     time: '17:47',
@@ -44,6 +53,7 @@ export const dataComments: IComment[] = [
     category: 'Опросы',
   },
   {
+    id: 5,
     username: 'Елена',
     date: '23.09.2023',
     time: '17:42',
@@ -54,6 +64,7 @@ export const dataComments: IComment[] = [
     category: null,
   },
   {
+    id: 6,
     username: 'Лина',
     date: '23.09.2023',
     time: '17:38',
@@ -64,6 +75,7 @@ export const dataComments: IComment[] = [
     category: null,
   },
   {
+    id: 7,
     username: 'Анна',
     date: '23.09.2023',
     time: '17:47',
@@ -75,6 +87,7 @@ export const dataComments: IComment[] = [
     category: 'Опросы',
   },
   {
+    id: 8,
     username: 'Елена',
     date: '23.09.2023',
     time: '17:42',
@@ -85,6 +98,7 @@ export const dataComments: IComment[] = [
     category: null,
   },
   {
+    id: 9,
     username: 'Лина',
     date: '23.09.2023',
     time: '17:38',
@@ -95,6 +109,7 @@ export const dataComments: IComment[] = [
     category: null,
   },
   {
+    id: 10,
     username: 'Лина',
     date: '23.09.2023',
     time: '17:38',
@@ -108,16 +123,19 @@ export const dataComments: IComment[] = [
 
 export const lastCheckedNumbers: ITelNumberLine[] = [
   {
+    id: 1,
     telNumber: '9587137815',
     viewsCount: 22,
     commentsCount: 10,
   },
   {
+    id: 2,
     telNumber: '9956623224',
     viewsCount: 2,
     commentsCount: 3,
   },
   {
+    id: 3,
     telNumber: '9209466521',
     viewsCount: 5,
     commentsCount: 1,
@@ -126,6 +144,7 @@ export const lastCheckedNumbers: ITelNumberLine[] = [
 
 export const newReviews: INewReview[] = [
   {
+    id: 1,
     telNumber: '9672163843',
     category: null,
     commentsCount: 3,
@@ -133,6 +152,7 @@ export const newReviews: INewReview[] = [
   },
 
   {
+    id: 2,
     telNumber: '3472324018',
     category: 'Реклама',
     commentsCount: 1,
@@ -140,6 +160,7 @@ export const newReviews: INewReview[] = [
   },
 
   {
+    id: 3,
     telNumber: '9274064037',
     category: 'Мошенники',
     commentsCount: 1,
@@ -147,6 +168,7 @@ export const newReviews: INewReview[] = [
   },
 
   {
+    id: 4,
     telNumber: '9250414178',
     category: null,
     commentsCount: 2,
@@ -154,7 +176,7 @@ export const newReviews: INewReview[] = [
   },
 ];
 
-export const chartData = [
+export const chartData: IStatisticPoint[] = [
   {
     name: 'Январь',
     reviewsCount: 2,
@@ -204,6 +226,7 @@ export const chartData = [
 export const mockReviews: Record<string, IComment[]> = {
   '9587137815': [
     {
+      id: 1,
       username: 'Анна',
       date: '23.09.2023',
       time: '17:47',
@@ -215,6 +238,7 @@ export const mockReviews: Record<string, IComment[]> = {
       category: 'Опросы',
     },
     {
+      id: 2,
       username: 'Анна',
       date: '23.09.2023',
       time: '17:47',

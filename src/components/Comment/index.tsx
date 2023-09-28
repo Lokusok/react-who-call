@@ -30,7 +30,7 @@ const Comment: React.FC<CommentProps> = ({
         border: `1px solid ${grey[400]}`,
       }}
     >
-      <Grid direction="column">
+      <Grid container direction="column">
         <Grid
           item
           sx={{

@@ -42,7 +42,7 @@ const RatingComments: React.FC<RatingCommentsProps> = ({ title, numbers }) => {
             }}
           >
             {numbers.map((number) => (
-              <Grid component="li" item>
+              <Grid component="li" item key={number.id}>
                 <TelNumberLine
                   telNumber={number.telNumber}
                   viewsCount={number.viewsCount}
