@@ -29,3 +29,8 @@ export interface IStatisticPoint {
   name: string;
   reviewsCount: number;
 }
+
+export enum UniqueUserFields {
+  Email = 'email',
+  Username = 'username',
+}
