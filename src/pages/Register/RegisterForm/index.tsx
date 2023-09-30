@@ -60,7 +60,7 @@ const RegisterForm: React.FC = () => {
     errorMessage: string
   ): any => {
     return async (value: string) => {
-      let res = await dispatch(checkUnique({ type, value })).unwrap();
+      const res = await dispatch(checkUnique({ type, value })).unwrap();
 
       if (!res) {
         setErrorStatus();
@@ -69,6 +69,15 @@ const RegisterForm: React.FC = () => {
       return res ? true : errorMessage;
     };
   };
+
+  React.useEffect(() => {
+    dispatch(
+      setRegister({
+        registerStatus: StatusesStates.Default,
+        showStatus: false,
+      })
+    );
+  }, []);
 
   return (
     <>

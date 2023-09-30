@@ -46,7 +46,7 @@ export const userRegister = createAsyncThunk<boolean, IUserInfo>(
 
 export const checkUnique = createAsyncThunk<boolean, IUserUniqueCheck>(
   'user/checkUnique',
-  async (uniqueField, { dispatch }) => {
+  async (uniqueField) => {
     const response = await userAPI.post('/check-unique', {
       type: uniqueField.type,
       value: uniqueField.value,
