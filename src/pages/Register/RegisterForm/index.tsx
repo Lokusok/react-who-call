@@ -12,10 +12,11 @@ import Input from '../../components/styled/Input';
 import Invite from '../../components/Invite';
 import Error from '../../components/Form/Error';
 
-import { useAppDispatch, useAppSelector } from '../../../store';
+import { useAppDispatch } from '../../../store';
 import { userRegister, checkUnique } from '../../../store/slices/userSlice';
+import { setRegister } from '../../../store/slices/statusesSlice';
 
-import { UniqueUserFields } from '../../../types';
+import { UniqueUserFields, StatusesStates } from '../../../types';
 
 interface RegisterFormInputs {
   email: string;
@@ -38,8 +39,18 @@ const RegisterForm: React.FC = () => {
     reValidateMode: 'onBlur',
   });
 
+  const setErrorStatus = () => {
+    dispatch(
+      setRegister({
+        registerStatus: StatusesStates.Error,
+        showStatus: true,
+      })
+    );
+  };
+
   const registerUser: SubmitHandler<RegisterFormInputs> = (data) => {
     dispatch(userRegister(data));
+
     reset();
     navigate('/login');
   };
@@ -50,6 +61,10 @@ const RegisterForm: React.FC = () => {
   ): any => {
     return async (value: string) => {
       let res = await dispatch(checkUnique({ type, value })).unwrap();
+
+      if (!res) {
+        setErrorStatus();
+      }
 
       return res ? true : errorMessage;
     };
@@ -119,6 +134,10 @@ const RegisterForm: React.FC = () => {
                 checkIdentity: async () => {
                   let values = getValues(['password', 'confirmPassword']);
                   let res = values[0] === values[1];
+
+                  if (!res) {
+                    setErrorStatus();
+                  }
 
                   return res ? res : 'Пароли не совпадают';
                 },

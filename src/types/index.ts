@@ -34,3 +34,9 @@ export enum UniqueUserFields {
   Email = 'email',
   Username = 'username',
 }
+
+export enum StatusesStates {
+  Error = 'error',
+  Success = 'success',
+  Default = 'default',
+}

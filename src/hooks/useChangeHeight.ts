@@ -10,7 +10,6 @@ const useChangeHeight = (ref: React.RefObject<HTMLElement>) => {
   React.useEffect(extractAndSet, [ref]);
 
   React.useEffect(() => {
-    console.log('here');
     window.addEventListener('resize', extractAndSet);
 
     return () => {
