@@ -51,13 +51,11 @@ const LoginForm: React.FC = () => {
     reValidateMode: 'onBlur',
   });
 
-  const loginUser: SubmitHandler<LoginFormInputs> = (data) => {
+  const loginUser: SubmitHandler<LoginFormInputs> = async (data) => {
     console.log({ data });
-    const result = dispatch(
+    const result = await dispatch(
       userLogin({ email: data.email, password: data.password })
     ).unwrap();
-
-    console.log({ result });
   };
 
   useHideStatusByDefault({ dispatch, type: TypesOfStatuses.Login });

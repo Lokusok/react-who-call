@@ -1,15 +1,9 @@
 import React from 'react';
 
-import { StatusesStates } from '../../../types';
-
-import { Box, Typography, Stack, AlertColor } from '@mui/material';
+import { Box, Typography, Stack } from '@mui/material';
 import { grey } from '@mui/material/colors';
 
 import { styled } from 'styled-components';
-
-import Status from './Status';
-
-import { useAppSelector } from '../../../store';
 
 const Wrapper = styled.form`
   border: 1px solid ${grey[300]};
@@ -37,42 +31,9 @@ interface FormProps {
   children: React.ReactNode;
 }
 
-const severities = {
-  register: {
-    [StatusesStates.Success]: 'success',
-    [StatusesStates.Error]: 'error',
-    [StatusesStates.Default]: 'info',
-  },
-};
-
-const statusTexts = {
-  register: {
-    [StatusesStates.Success]: 'Регистрация прошла успешно',
-    [StatusesStates.Error]: 'При регистрации произошла ошибка',
-    [StatusesStates.Default]: null,
-  },
-};
-
 const Form: React.FC<FormProps> = ({ onSubmit, method, title, children }) => {
-  const { status: statusRegister, showStatus: showStatusRegister } =
-    useAppSelector((state) => state.status.register);
-  const { status: statusLogin, showStatus: showStatusLogin } = useAppSelector(
-    (state) => state.status.login
-  );
-
-  const showStatus: boolean = showStatusRegister || showStatusLogin;
-
-  const severity = severities.register[
-    statusRegister || statusLogin
-  ] as AlertColor;
-  const text = statusTexts.register[statusRegister || statusLogin];
-
   return (
     <>
-      <Status open={showStatus} severity={severity}>
-        {text}
-      </Status>
-
       <Wrapper onSubmit={onSubmit} method={method}>
         <Header>
           <Typography fontWeight={700}>{title}</Typography>

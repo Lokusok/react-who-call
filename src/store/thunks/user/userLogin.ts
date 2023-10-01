@@ -1,8 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { setLoggedIn, setUsername } from '../../slices/userSlice';
+import { setLogin } from '../statuses/setLogin';
 
 import { userAPI } from '../../../api';
+
+import { StatusesStates } from '../../../types';
 
 interface UserLoginThunkPayload {
   email: string;
@@ -23,12 +26,21 @@ export const userLogin = createAsyncThunk<
     password,
   });
 
-  console.log(response.data);
+  const { result, username, token } = response.data;
 
-  const { result, username } = response.data;
+  if (token) {
+    window.localStorage.setItem('token', token);
+  }
 
   dispatch(setLoggedIn(result));
   dispatch(setUsername(username));
+
+  dispatch(
+    setLogin({
+      loginStatus: StatusesStates.Success,
+      showStatus: true,
+    })
+  );
 
   return { result, username };
 });

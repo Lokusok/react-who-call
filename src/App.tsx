@@ -23,6 +23,11 @@ import Footer from './components/Footer';
 import Search from './components/Search';
 
 import Enter from './pages/components/Enter';
+import StatusLayer from './components/StatusLayer';
+
+import { useAppDispatch } from './store';
+
+import processToken from './store/thunks/user/processToken';
 
 const globStyles = {
   body: { minHeight: '100vh' },
@@ -34,10 +39,24 @@ const App: React.FC = () => {
   const headerRef = React.useRef(null);
   const [height] = useChangeHeight(headerRef);
 
+  const dispatch = useAppDispatch();
+
+  React.useEffect(() => {
+    const token = window.localStorage.getItem('token');
+
+    console.log({ token });
+
+    if (token) {
+      dispatch(processToken({ token }));
+    }
+  }, []);
+
   return (
     <>
       <BrowserRouter>
         <GlobalStyles styles={globStyles} />
+
+        <StatusLayer />
         <Header ref={headerRef} />
 
         <Box sx={{ marginTop: `${height}px`, flexGrow: 1 }}>
