@@ -6,13 +6,13 @@ import { Container, Grid } from '@mui/material';
 
 import Sidebar from '../components/Sidebar';
 
+import useScrollTop from '../hooks/useScrollTop';
+
 const Main: React.FC = () => {
   const params = useParams();
   const { telNumber } = params;
 
-  React.useEffect(() => {
-    window.scrollTo(0, 0);
-  });
+  useScrollTop();
 
   return (
     <Container component="main">

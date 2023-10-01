@@ -54,11 +54,18 @@ const statusTexts = {
 };
 
 const Form: React.FC<FormProps> = ({ onSubmit, method, title, children }) => {
-  const { status, showStatus } = useAppSelector(
-    (state) => state.status.register
+  const { status: statusRegister, showStatus: showStatusRegister } =
+    useAppSelector((state) => state.status.register);
+  const { status: statusLogin, showStatus: showStatusLogin } = useAppSelector(
+    (state) => state.status.login
   );
-  const severity = severities.register[status] as AlertColor;
-  const text = statusTexts.register[status];
+
+  const showStatus: boolean = showStatusRegister || showStatusLogin;
+
+  const severity = severities.register[
+    statusRegister || statusLogin
+  ] as AlertColor;
+  const text = statusTexts.register[statusRegister || statusLogin];
 
   return (
     <>

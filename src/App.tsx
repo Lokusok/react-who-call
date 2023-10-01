@@ -16,6 +16,8 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgetPassword from './pages/ForgetPassword';
 
+import RequireNotAuth from './hoc/RequireNotAuth';
+
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Search from './components/Search';
@@ -51,8 +53,22 @@ const App: React.FC = () => {
             </Route>
 
             <Route path="/" element={<Enter />}>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
+              <Route
+                path="/login"
+                element={
+                  <RequireNotAuth>
+                    <Login />
+                  </RequireNotAuth>
+                }
+              />
+              <Route
+                path="/register"
+                element={
+                  <RequireNotAuth>
+                    <Register />
+                  </RequireNotAuth>
+                }
+              />
               <Route path="/forget_password" element={<ForgetPassword />} />
             </Route>
           </Routes>

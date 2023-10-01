@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { StatusesStates } from '../../types';
 
@@ -7,27 +7,20 @@ interface IStatusesState {
     status: StatusesStates;
     showStatus: boolean;
   };
+
+  login: {
+    status: StatusesStates;
+    showStatus: boolean;
+  };
 }
-
-interface SetRegisterThunkPayload {
-  registerStatus: StatusesStates;
-  showStatus: boolean;
-}
-
-export const setRegister = createAsyncThunk<void, SetRegisterThunkPayload>(
-  'statuses/setRegister',
-  ({ registerStatus, showStatus }, { dispatch }) => {
-    dispatch(setRegisterStatus(registerStatus));
-    dispatch(setShowRegisterStatus(showStatus));
-
-    setTimeout(() => {
-      dispatch(setShowRegisterStatus(false));
-    }, 3000);
-  }
-);
 
 const initialState: IStatusesState = {
   register: {
+    status: StatusesStates.Default,
+    showStatus: false,
+  },
+
+  login: {
     status: StatusesStates.Default,
     showStatus: false,
   },
@@ -44,10 +37,22 @@ const statusesSlice = createSlice({
     setShowRegisterStatus(state, action: PayloadAction<boolean>) {
       state.register.showStatus = action.payload;
     },
+
+    setLoginStatus(state, action: PayloadAction<StatusesStates>) {
+      state.login.status = action.payload;
+    },
+
+    setShowLoginStatus(state, action: PayloadAction<boolean>) {
+      state.login.showStatus = action.payload;
+    },
   },
 });
 
-export const { setRegisterStatus, setShowRegisterStatus } =
-  statusesSlice.actions;
+export const {
+  setRegisterStatus,
+  setShowRegisterStatus,
+  setLoginStatus,
+  setShowLoginStatus,
+} = statusesSlice.actions;
 
 export default statusesSlice.reducer;

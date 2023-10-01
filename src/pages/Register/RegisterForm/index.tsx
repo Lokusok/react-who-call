@@ -13,10 +13,18 @@ import Invite from '../../components/Invite';
 import Error from '../../components/Form/Error';
 
 import { useAppDispatch } from '../../../store';
-import { userRegister, checkUnique } from '../../../store/slices/userSlice';
-import { setRegister } from '../../../store/slices/statusesSlice';
 
-import { UniqueUserFields, StatusesStates } from '../../../types';
+import { setRegister } from '../../../store/thunks/statuses/setRegister';
+import { checkUnique } from '../../../store/thunks/user/checkUnique';
+import { userRegister } from '../../../store/thunks/user/userRegister';
+
+import useHideStatusByDefault from '../../../hooks/useHideStatusByDefault';
+
+import {
+  UniqueUserFields,
+  StatusesStates,
+  TypesOfStatuses,
+} from '../../../types';
 
 interface RegisterFormInputs {
   email: string;
@@ -70,14 +78,7 @@ const RegisterForm: React.FC = () => {
     };
   };
 
-  React.useEffect(() => {
-    dispatch(
-      setRegister({
-        registerStatus: StatusesStates.Default,
-        showStatus: false,
-      })
-    );
-  }, []);
+  useHideStatusByDefault({ dispatch, type: TypesOfStatuses.Register });
 
   return (
     <>

@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { Link as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { useForm, SubmitHandler } from 'react-hook-form';
 
 import {
   Typography,
@@ -14,31 +15,80 @@ import { styled } from '@mui/material/styles';
 
 import Form from '../../components/Form';
 import Invite from '../../components/Invite';
+import Error from '../../components/Form/Error';
 
 import ButtonSuccess from '../../components/styled/ButtonSuccess';
 import Input from '../../components/styled/Input';
+
+import { useAppDispatch } from '../../../store';
+import { userLogin } from '../../../store/thunks/user/userLogin';
+
+import useHideStatusByDefault from '../../../hooks/useHideStatusByDefault';
+
+import { TypesOfStatuses } from '../../../types';
 
 const CustomCheckbox = styled(Checkbox)`
   padding: 0;
   padding-right: 7px;
 `;
 
+interface LoginFormInputs {
+  email: string;
+  password: string;
+  remember: string;
+}
+
 const LoginForm: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<LoginFormInputs>({
+    reValidateMode: 'onBlur',
+  });
+
+  const loginUser: SubmitHandler<LoginFormInputs> = (data) => {
+    console.log({ data });
+    const result = dispatch(
+      userLogin({ email: data.email, password: data.password })
+    ).unwrap();
+
+    console.log({ result });
+  };
+
+  useHideStatusByDefault({ dispatch, type: TypesOfStatuses.Login });
+
   return (
     <>
-      <Form method="POST" title={'Войти'}>
+      <Form onSubmit={handleSubmit(loginUser)} method="POST" title={'Войти'}>
         <Stack direction="column" spacing={1}>
           <FormLabel htmlFor="email">E-mail:</FormLabel>
-          <Input name="email" id="email" type="email" required />
+          <Input
+            {...register('email')}
+            name="email"
+            id="email"
+            type="email"
+            required
+          />
         </Stack>
 
         <Stack direction="column" spacing={1}>
           <FormLabel htmlFor="password">Пароль:</FormLabel>
-          <Input name="password" id="password" type="password" required />
+          <Input
+            {...register('password')}
+            name="password"
+            id="password"
+            type="password"
+            required
+          />
         </Stack>
 
         <FormControlLabel
-          control={<CustomCheckbox />}
+          control={<CustomCheckbox {...register('remember')} />}
           label={<Typography>Запомнить меня</Typography>}
         />
 

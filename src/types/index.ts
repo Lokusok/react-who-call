@@ -40,3 +40,8 @@ export enum StatusesStates {
   Success = 'success',
   Default = 'default',
 }
+
+export enum TypesOfStatuses {
+  Register = 'register',
+  Login = 'login',
+}

@@ -4,8 +4,9 @@ import { AppBar, Container, Grid } from '@mui/material';
 
 import HeaderItems from './HeaderItems';
 import Burger from './Burger';
-import NavLink from './NavLink';
+
 import MobileMenu from '../MobileMenu';
+import ProfileLink from './ProfileLink';
 
 const Header = React.forwardRef((props, ref: React.Ref<HTMLElement>) => {
   const [visibleMenu, setVisibleMenu] = React.useState(false);
@@ -27,7 +28,7 @@ const Header = React.forwardRef((props, ref: React.Ref<HTMLElement>) => {
           </Grid>
 
           <Grid item sx={{ display: { xs: 'none', sm: 'initial' } }}>
-            <NavLink to="/login">Войти</NavLink>
+            <ProfileLink />
           </Grid>
 
           <Burger onClick={clickOnBurger} />

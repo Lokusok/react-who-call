@@ -1,69 +1,29 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { userAPI } from '../../api';
-
-import { UniqueUserFields, StatusesStates } from '../../types';
-
-import { setRegister } from './statusesSlice';
-
-interface IUserUniqueCheck {
-  type: UniqueUserFields;
-  value: string;
-}
-
-interface IUserInfo {
-  email: string;
-  username: string;
-  password: string;
-}
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IUserState {
   loggedIn: boolean;
+  username: string | null;
 }
-
-export const userRegister = createAsyncThunk<boolean, IUserInfo>(
-  'user/register',
-  async (userData, { dispatch }) => {
-    const response = await userAPI.post('/register', {
-      username: userData.username,
-      email: userData.email,
-      password: userData.password,
-    });
-
-    const { user, token } = response.data;
-
-    window.localStorage.setItem('token', token);
-
-    dispatch(
-      setRegister({
-        registerStatus: StatusesStates.Success,
-        showStatus: true,
-      })
-    );
-
-    return true;
-  }
-);
-
-export const checkUnique = createAsyncThunk<boolean, IUserUniqueCheck>(
-  'user/checkUnique',
-  async (uniqueField) => {
-    const response = await userAPI.post('/check-unique', {
-      type: uniqueField.type,
-      value: uniqueField.value,
-    });
-
-    return response.data;
-  }
-);
 
 const initialState: IUserState = {
   loggedIn: false,
+  username: null,
 };
 
 const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setLoggedIn(state, action: PayloadAction<boolean>) {
+      state.loggedIn = action.payload;
+    },
+
+    setUsername(state, action: PayloadAction<string>) {
+      state.username = action.payload;
+    },
+  },
 });
+
+export const { setUsername, setLoggedIn } = userSlice.actions;
 
 export default userSlice.reducer;
