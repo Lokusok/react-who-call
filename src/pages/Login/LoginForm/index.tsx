@@ -52,9 +52,12 @@ const LoginForm: React.FC = () => {
   });
 
   const loginUser: SubmitHandler<LoginFormInputs> = async (data) => {
-    console.log({ data });
     const result = await dispatch(
-      userLogin({ email: data.email, password: data.password })
+      userLogin({
+        email: data.email,
+        password: data.password,
+        remember: Boolean(data.remember),
+      })
     ).unwrap();
   };
 

@@ -5,6 +5,7 @@ import { GlobalStyles, Box, CssBaseline } from '@mui/material';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import useChangeHeight from './hooks/useChangeHeight';
+import useProcessToken from './hooks/useProcessToken';
 
 import Main from './layouts/Main';
 
@@ -27,8 +28,6 @@ import StatusLayer from './components/StatusLayer';
 
 import { useAppDispatch } from './store';
 
-import processToken from './store/thunks/user/processToken';
-
 const globStyles = {
   body: { minHeight: '100vh' },
   '#root': { minHeight: '100vh', display: 'flex', flexDirection: 'column' },
@@ -40,16 +39,7 @@ const App: React.FC = () => {
   const [height] = useChangeHeight(headerRef);
 
   const dispatch = useAppDispatch();
-
-  React.useEffect(() => {
-    const token = window.localStorage.getItem('token');
-
-    console.log({ token });
-
-    if (token) {
-      dispatch(processToken({ token }));
-    }
-  }, []);
+  useProcessToken(dispatch);
 
   return (
     <>

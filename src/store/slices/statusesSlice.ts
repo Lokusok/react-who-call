@@ -12,6 +12,10 @@ interface IStatusesState {
     status: StatusesStates;
     showStatus: boolean;
   };
+  logout: {
+    status: StatusesStates;
+    showStatus: boolean;
+  };
 }
 
 const initialState: IStatusesState = {
@@ -21,6 +25,10 @@ const initialState: IStatusesState = {
   },
 
   login: {
+    status: StatusesStates.Default,
+    showStatus: false,
+  },
+  logout: {
     status: StatusesStates.Default,
     showStatus: false,
   },
@@ -45,6 +53,14 @@ const statusesSlice = createSlice({
     setShowLoginStatus(state, action: PayloadAction<boolean>) {
       state.login.showStatus = action.payload;
     },
+
+    setLogoutStatus(state, action: PayloadAction<StatusesStates>) {
+      state.logout.status = action.payload;
+    },
+
+    setShowLogoutStatus(state, action: PayloadAction<boolean>) {
+      state.logout.showStatus = action.payload;
+    },
   },
 });
 
@@ -53,6 +69,8 @@ export const {
   setShowRegisterStatus,
   setLoginStatus,
   setShowLoginStatus,
+  setLogoutStatus,
+  setShowLogoutStatus,
 } = statusesSlice.actions;
 
 export default statusesSlice.reducer;

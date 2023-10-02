@@ -18,5 +18,9 @@ export const setLogin = createAsyncThunk<void, SetLoginThunkPayload>(
     setTimeout(() => {
       dispatch(setShowLoginStatus(false));
     }, 3000);
+
+    setTimeout(() => {
+      dispatch(setLoginStatus(StatusesStates.Default));
+    }, 4000);
   }
 );

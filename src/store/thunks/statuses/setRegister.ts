@@ -21,5 +21,9 @@ export const setRegister = createAsyncThunk<void, SetRegisterThunkPayload>(
     setTimeout(() => {
       dispatch(setShowRegisterStatus(false));
     }, 3000);
+
+    setTimeout(() => {
+      dispatch(setRegisterStatus(StatusesStates.Default));
+    }, 4000);
   }
 );

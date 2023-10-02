@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { Typography } from '@mui/material';
+import { Typography, Stack } from '@mui/material';
 
 import NavLink from '../NavLink';
 
 import { useAppSelector } from '../../../store';
+import LogoutButton from '../LogoutButton';
 
 const ProfileLink: React.FC = () => {
   const { username, loggedIn } = useAppSelector((state) => state.user);
@@ -12,7 +13,10 @@ const ProfileLink: React.FC = () => {
   return (
     <>
       {loggedIn ? (
-        <Typography>{username}</Typography>
+        <Stack direction="row" alignItems="center">
+          <Typography>{username}</Typography>
+          <LogoutButton />
+        </Stack>
       ) : (
         <NavLink to="/login">Войти</NavLink>
       )}

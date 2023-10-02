@@ -13,7 +13,7 @@ const RequireNotAuth: React.FC<RequireNotAuthProps> = ({ children }) => {
   const loggedIn = useAppSelector((state) => state.user.loggedIn);
 
   if (loggedIn) {
-    navigate(-1);
+    navigate('/');
   }
 
   return children;

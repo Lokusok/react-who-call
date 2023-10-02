@@ -18,7 +18,7 @@ const userSlice = createSlice({
       state.loggedIn = action.payload;
     },
 
-    setUsername(state, action: PayloadAction<string>) {
+    setUsername(state, action: PayloadAction<string | null>) {
       state.username = action.payload;
     },
   },
