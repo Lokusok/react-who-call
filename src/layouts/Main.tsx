@@ -7,12 +7,14 @@ import { Container, Grid } from '@mui/material';
 import Sidebar from '../components/Sidebar';
 
 import useScrollTop from '../hooks/useScrollTop';
+import useRedirectOnActiveTelNumber from '../hooks/useRedirectOnActiveTelNumber';
 
 const Main: React.FC = () => {
   const params = useParams();
   const { telNumber } = params;
 
   useScrollTop();
+  useRedirectOnActiveTelNumber();
 
   return (
     <Container component="main">

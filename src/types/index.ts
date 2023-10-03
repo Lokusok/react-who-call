@@ -30,6 +30,15 @@ export interface IStatisticPoint {
   reviewsCount: number;
 }
 
+export interface ITel {
+  id: number;
+  telNumber: string;
+  rating: number;
+  viewsCount: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
 export enum UniqueUserFields {
   Email = 'email',
   Username = 'username',

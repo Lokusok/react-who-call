@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { useNavigate } from 'react-router-dom';
+import { useForm, SubmitHandler } from 'react-hook-form';
+
 import {
   Box,
   Container,
@@ -11,7 +14,19 @@ import {
 } from '@mui/material';
 import { grey } from '@mui/material/colors';
 
-const Search = () => {
+import { useAppDispatch } from '../../store';
+import { resetActiveTel } from '../../store/slices/telSlice';
+
+interface SearchInputs {
+  telNumber: string;
+}
+
+const Search: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const { register, reset, handleSubmit } = useForm<SearchInputs>();
+
   const isNeedOneColumn = useMediaQuery('(max-width: 720px)');
   const additionalStylesForOneColumn = isNeedOneColumn
     ? {
@@ -20,45 +35,60 @@ const Search = () => {
       }
     : {};
 
+  const searchTelephone: SubmitHandler<SearchInputs> = (data) => {
+    // dispatch(searchTel({ telNumber: data.telNumber }));
+    navigate(`/tel/${data.telNumber}`);
+    reset();
+
+    dispatch(resetActiveTel());
+  };
+
   return (
     <Box sx={{ padding: '2rem 0', backgroundColor: grey[200] }}>
       <Container sx={{ width: { lg: '70%' }, margin: '0 auto' }}>
-        <Grid
-          container
-          justifyContent={isNeedOneColumn ? 'center' : 'space-between'}
-          alignItems="center"
-        >
-          <Grid item>
-            <Typography fontWeight={600}>Поиск по номеру телефона:</Typography>
-          </Grid>
+        <form onSubmit={handleSubmit(searchTelephone)}>
           <Grid
-            item
-            flexGrow={1}
-            sx={{
-              paddingLeft: '1.5rem',
-              paddingRight: '2rem',
-              ...additionalStylesForOneColumn,
-            }}
+            container
+            justifyContent={isNeedOneColumn ? 'center' : 'space-between'}
+            alignItems="center"
           >
-            <TextField
-              placeholder={'Например, +74957501243'}
-              fullWidth={true}
+            <Grid item>
+              <Typography fontWeight={600}>
+                Поиск по номеру телефона:
+              </Typography>
+            </Grid>
+            <Grid
+              item
+              flexGrow={1}
               sx={{
-                '& .MuiInputBase-root': { overflow: 'hidden' },
-                '& input': { backgroundColor: '#fff' },
+                paddingLeft: '1.5rem',
+                paddingRight: '2rem',
+                ...additionalStylesForOneColumn,
               }}
-            />
-          </Grid>
-          <Grid item>
-            <Button
-              variant="contained"
-              size="large"
-              sx={{ textTransform: 'none' }}
             >
-              Начать поиск
-            </Button>
+              <TextField
+                {...register('telNumber')}
+                placeholder={'Например, +74957501243'}
+                fullWidth={true}
+                sx={{
+                  '& .MuiInputBase-root': { overflow: 'hidden' },
+                  '& input': { backgroundColor: '#fff' },
+                }}
+                required
+              />
+            </Grid>
+            <Grid item>
+              <Button
+                variant="contained"
+                size="large"
+                sx={{ textTransform: 'none' }}
+                type="submit"
+              >
+                Начать поиск
+              </Button>
+            </Grid>
           </Grid>
-        </Grid>
+        </form>
       </Container>
     </Box>
   );

@@ -7,17 +7,48 @@ import { Typography, Box, Alert } from '@mui/material';
 import TelNumberTable from '../../components/TelNumberTable';
 import InfoBlock from './components/InfoBlock';
 
-import parsePhoneNumber from 'libphonenumber-js';
-
 import Activity from './components/Activity';
 import CommentAddForm from '../../components/CommentAddForm';
 import CommentsList from '../../components/CommentsList';
 
+import { resetActiveTel } from '../../store/slices/telSlice';
+import { searchTel } from '../../store/thunks/tel/searchTel';
+import { isValid } from '../../store/thunks/tel/isValid';
+
+import { useAppDispatch, useAppSelector } from '../../store';
+
 const TelNumber: React.FC = () => {
-  const params = useParams<{ telNumber: string }>();
-  const { telNumber } = params;
-  const phoneNumber = parsePhoneNumber(telNumber as string, 'RU');
-  const isValidNumber = phoneNumber?.isValid();
+  const dispatch = useAppDispatch();
+  const activeTel = useAppSelector((state) => state.tel.activeTel);
+
+  const params = useParams();
+
+  const telNumber = (activeTel?.telNumber || params.telNumber) as string;
+  const [isValidNumber, setIsValidNumber] = React.useState(true);
+
+  React.useEffect(() => {
+    const telNumberEffect = async () => {
+      const isValidValue: boolean = await dispatch(
+        isValid({ telNumber })
+      ).unwrap();
+      setIsValidNumber(isValidValue);
+      dispatch(searchTel({ telNumber }));
+    };
+
+    if (!activeTel) {
+      telNumberEffect();
+    }
+  }, [activeTel, params]);
+
+  const { internationalFormat, nationalFormat } = useAppSelector(
+    (state) => state.tel.formats
+  );
+
+  React.useEffect(() => {
+    return () => {
+      dispatch(resetActiveTel());
+    };
+  }, []);
 
   if (!isValidNumber) {
     return (
@@ -29,9 +60,6 @@ const TelNumber: React.FC = () => {
       </Alert>
     );
   }
-
-  const internationalFormat = phoneNumber?.formatInternational();
-  const nationalFormat = phoneNumber?.formatNational();
 
   return (
     <Box>
@@ -62,7 +90,10 @@ const TelNumber: React.FC = () => {
       </Typography>
 
       <Box sx={{ marginBottom: '1rem' }}>
-        <TelNumberTable rating={0} viewsCount={4} />
+        <TelNumberTable
+          rating={activeTel?.rating || 0}
+          viewsCount={activeTel?.viewsCount || 0}
+        />
       </Box>
 
       <Box sx={{ marginBottom: '1rem' }}>

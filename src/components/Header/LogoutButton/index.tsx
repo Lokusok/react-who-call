@@ -10,7 +10,7 @@ import { useAppDispatch } from '../../../store';
 const LogoutButton: React.FC = () => {
   const dispatch = useAppDispatch();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
     dispatch(userLogout());
   };
 

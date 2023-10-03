@@ -3,11 +3,13 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from 'react-redux';
 
 import user from './slices/userSlice';
 import status from './slices/statusesSlice';
+import tel from './slices/telSlice';
 
 const store = configureStore({
   reducer: {
     user,
     status,
+    tel,
   },
 });
 
