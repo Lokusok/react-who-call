@@ -7,3 +7,7 @@ export const userAPI = axios.create({
 export const telAPI = axios.create({
   baseURL: 'http://localhost:5500/tel',
 });
+
+export const telOuterAPI = axios.create({
+  baseURL: 'https://num.voxlink.ru/',
+});

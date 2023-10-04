@@ -14,23 +14,34 @@ import CommentsList from '../../components/CommentsList';
 import { resetActiveTel } from '../../store/slices/telSlice';
 import { searchTel } from '../../store/thunks/tel/searchTel';
 import { isValid } from '../../store/thunks/tel/isValid';
+import { searchAdditionalInfo } from '../../store/thunks/tel/searchAdditionalInfo';
 
 import { useAppDispatch, useAppSelector } from '../../store';
 
 const TelNumber: React.FC = () => {
   const dispatch = useAppDispatch();
   const activeTel = useAppSelector((state) => state.tel.activeTel);
+  const additionalInfo = useAppSelector((state) => state.tel.additionalInfo);
 
   const params = useParams();
 
   const telNumber = (activeTel?.telNumber || params.telNumber) as string;
   const [isValidNumber, setIsValidNumber] = React.useState(true);
 
+  const { internationalFormat, nationalFormat } = useAppSelector(
+    (state) => state.tel.formats
+    );
+
+  React.useEffect(() => {
+    dispatch(searchAdditionalInfo({ telNumber }));
+  }, [activeTel]);
+
   React.useEffect(() => {
     const telNumberEffect = async () => {
       const isValidValue: boolean = await dispatch(
         isValid({ telNumber })
       ).unwrap();
+
       setIsValidNumber(isValidValue);
       dispatch(searchTel({ telNumber }));
     };
@@ -39,10 +50,6 @@ const TelNumber: React.FC = () => {
       telNumberEffect();
     }
   }, [activeTel, params]);
-
-  const { internationalFormat, nationalFormat } = useAppSelector(
-    (state) => state.tel.formats
-  );
 
   React.useEffect(() => {
     return () => {
@@ -98,8 +105,8 @@ const TelNumber: React.FC = () => {
 
       <Box sx={{ marginBottom: '1rem' }}>
         <InfoBlock title={`Оператор номера ${internationalFormat}`}>
-          Номер +7{telNumber} принадлежит оператору ПАО "МегаФон" в регионе
-          Чеченская Республика
+          Номер +7{telNumber} принадлежит оператору {additionalInfo.operator} в регионе&nbsp;
+          {additionalInfo.region}
         </InfoBlock>
       </Box>
 

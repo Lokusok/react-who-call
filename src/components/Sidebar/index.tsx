@@ -22,6 +22,7 @@ const Sidebar: React.FC = () => {
           <Stack direction="column" spacing={2}>
             {newReviews.map((review) => (
               <NewReview
+                key={review.id}
                 telNumber={review.telNumber}
                 category={review.category}
                 commentsCount={review.commentsCount}

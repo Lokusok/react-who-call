@@ -11,7 +11,7 @@ interface SearchTelAndSetProps {
 
 export const searchTel = createAsyncThunk<ITel, SearchTelAndSetProps>(
   'tel/searchTelAndSet',
-  async ({ telNumber }, { dispatch, rejectWithValue }) => {
+  async ({ telNumber }, { dispatch }) => {
     const response = await telAPI.post('/search', { search: telNumber });
 
     if (response.data) {

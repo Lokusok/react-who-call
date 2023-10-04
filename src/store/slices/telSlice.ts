@@ -9,9 +9,15 @@ interface ITelFormats {
   nationalFormat: string | null;
 }
 
+interface IAdditionalInfo {
+  operator: string | null;
+  region: string | null;
+}
+
 interface ITelState {
   activeTel: ITel | null;
   formats: ITelFormats;
+  additionalInfo: IAdditionalInfo;
 }
 
 const initialState: ITelState = {
@@ -20,6 +26,10 @@ const initialState: ITelState = {
     internationalFormat: null,
     nationalFormat: null,
   },
+  additionalInfo: {
+    operator: null,
+    region: null,
+  }
 };
 
 const telSlice = createSlice({
@@ -34,6 +44,11 @@ const telSlice = createSlice({
       state.formats.internationalFormat = action.payload.internationalFormat;
       state.formats.nationalFormat = action.payload.nationalFormat;
     },
+
+    setAdditionalInfo(state, action: PayloadAction<IAdditionalInfo>) {
+      state.additionalInfo.operator = action.payload.operator;
+      state.additionalInfo.region = action.payload.region;
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -46,6 +61,6 @@ const telSlice = createSlice({
   },
 });
 
-export const { resetActiveTel, setFormats } = telSlice.actions;
+export const { resetActiveTel, setFormats, setAdditionalInfo } = telSlice.actions;
 
 export default telSlice.reducer;
