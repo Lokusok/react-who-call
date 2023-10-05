@@ -10,18 +10,22 @@ interface ProcessTokenProps {
 const processToken = createAsyncThunk<boolean, ProcessTokenProps>(
   'user/processToken',
   async ({ token }, { dispatch }) => {
-    const response = await userAPI.post('/verify-jwt', {
-      token,
-    });
+    try {
+      const response = await userAPI.post('/verify-jwt', {
+        token,
+      });
 
-    const userData = response.data;
+      const userData = response.data;
 
-    if (userData.username) {
       dispatch(setLoggedIn(true));
       dispatch(setUsername(userData.username));
-    }
 
-    return Boolean(userData.username);
+      return true;
+    } catch (err) {
+      dispatch(setLoggedIn(false));
+
+      return false;
+    }
   }
 );
 

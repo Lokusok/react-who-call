@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Typography, Stack } from '@mui/material';
+import { Typography, Stack, Skeleton } from '@mui/material';
 
 import NavLink from '../NavLink';
 
@@ -10,6 +10,10 @@ import LogoutButton from '../LogoutButton';
 const ProfileLink: React.FC = () => {
   const { username, loggedIn } = useAppSelector((state) => state.user);
 
+  React.useEffect(() => {
+    console.log({ loggedIn });
+  }, [loggedIn]);
+
   return (
     <>
       {loggedIn ? (
@@ -18,7 +22,15 @@ const ProfileLink: React.FC = () => {
           <LogoutButton />
         </Stack>
       ) : (
-        <NavLink to="/login">Войти</NavLink>
+        <>
+          {loggedIn === null ? (
+            <Skeleton>
+              <NavLink to="/login">Войти</NavLink>
+            </Skeleton>
+          ) : (
+            <NavLink to="/login">Войти</NavLink>
+          )}
+        </>
       )}
     </>
   );

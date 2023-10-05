@@ -1,9 +1,4 @@
-import {
-  IComment,
-  ITelNumberLine,
-  INewReview,
-  IStatisticPoint,
-} from '../types';
+import { IComment, INewReview, IStatisticPoint } from '../types';
 
 export const dataComments: IComment[] = [
   {
@@ -118,27 +113,6 @@ export const dataComments: IComment[] = [
     commentsCount: 2,
     description: 'Положительный звонок, сервисное обслуживание',
     category: null,
-  },
-];
-
-export const lastCheckedNumbers: ITelNumberLine[] = [
-  {
-    id: 1,
-    telNumber: '9587137815',
-    viewsCount: 22,
-    commentsCount: 10,
-  },
-  {
-    id: 2,
-    telNumber: '9956623224',
-    viewsCount: 2,
-    commentsCount: 3,
-  },
-  {
-    id: 3,
-    telNumber: '9209466521',
-    viewsCount: 5,
-    commentsCount: 1,
   },
 ];
 

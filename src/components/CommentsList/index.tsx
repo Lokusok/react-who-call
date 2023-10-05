@@ -26,6 +26,7 @@ const CommentsList: React.FC<CommentsListProps> = ({ telNumber }) => {
           {reviews.map((review) => (
             <Box>
               <Comment
+                id={review.id}
                 username={review.username}
                 description={review.description}
                 date={review.date}

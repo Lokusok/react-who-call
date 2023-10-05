@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ITel } from '../../types';
+import { ITel, IPreviewOfTel } from '../../types';
 
 import { searchTel } from '../thunks/tel/searchTel';
 
@@ -18,6 +18,9 @@ interface ITelState {
   activeTel: ITel | null;
   formats: ITelFormats;
   additionalInfo: IAdditionalInfo;
+  lastVerified: IPreviewOfTel[] | [] | null;
+  mostViewed: IPreviewOfTel[] | [] | null;
+  mostCommented: IPreviewOfTel[] | [] | null;
 }
 
 const initialState: ITelState = {
@@ -29,7 +32,10 @@ const initialState: ITelState = {
   additionalInfo: {
     operator: null,
     region: null,
-  }
+  },
+  lastVerified: null,
+  mostViewed: null,
+  mostCommented: null,
 };
 
 const telSlice = createSlice({
@@ -48,19 +54,37 @@ const telSlice = createSlice({
     setAdditionalInfo(state, action: PayloadAction<IAdditionalInfo>) {
       state.additionalInfo.operator = action.payload.operator;
       state.additionalInfo.region = action.payload.region;
-    }
+    },
+
+    setLastVerified(state, action: PayloadAction<IPreviewOfTel[]>) {
+      state.lastVerified = action.payload;
+    },
+
+    setMostViewed(state, action: PayloadAction<IPreviewOfTel[]>) {
+      state.mostViewed = action.payload;
+    },
+
+    setMostCommented(state, action: PayloadAction<IPreviewOfTel[]>) {
+      state.mostCommented = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
       searchTel.fulfilled,
       (state, action: PayloadAction<ITel>) => {
-        console.log({ state, action });
         state.activeTel = action.payload;
       }
     );
   },
 });
 
-export const { resetActiveTel, setFormats, setAdditionalInfo } = telSlice.actions;
+export const {
+  resetActiveTel,
+  setFormats,
+  setAdditionalInfo,
+  setLastVerified,
+  setMostViewed,
+  setMostCommented,
+} = telSlice.actions;
 
 export default telSlice.reducer;

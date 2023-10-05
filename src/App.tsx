@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import useChangeHeight from './hooks/useChangeHeight';
 import useProcessToken from './hooks/useProcessToken';
+import useUsefulInfo from './hooks/useUsefulInfo';
 
 import Main from './layouts/Main';
 
@@ -40,6 +41,7 @@ const App: React.FC = () => {
 
   const dispatch = useAppDispatch();
   useProcessToken(dispatch);
+  useUsefulInfo(dispatch);
 
   return (
     <>

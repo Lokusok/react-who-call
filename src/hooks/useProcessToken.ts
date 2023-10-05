@@ -1,8 +1,9 @@
 import React from 'react';
 
-import processToken from '../store/thunks/user/processToken';
-
 import { AppDispatch } from '../store';
+
+import { setLoggedIn } from '../store/slices/userSlice';
+import processToken from '../store/thunks/user/processToken';
 
 const useProcessToken = (dispatch: AppDispatch) => {
   React.useEffect(() => {
@@ -11,8 +12,11 @@ const useProcessToken = (dispatch: AppDispatch) => {
 
       let result = null;
 
+      console.log(token);
       if (token) {
         result = await dispatch(processToken({ token })).unwrap();
+      } else {
+        dispatch(setLoggedIn(false));
       }
 
       if (!result) {

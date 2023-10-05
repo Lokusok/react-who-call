@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useParams } from 'react-router-dom';
 
-import { Typography, Box, Alert } from '@mui/material';
+import { Typography, Box, Alert, Skeleton } from '@mui/material';
 
 import TelNumberTable from '../../components/TelNumberTable';
 import InfoBlock from './components/InfoBlock';
@@ -17,6 +17,11 @@ import { isValid } from '../../store/thunks/tel/isValid';
 import { searchAdditionalInfo } from '../../store/thunks/tel/searchAdditionalInfo';
 
 import { useAppDispatch, useAppSelector } from '../../store';
+import Title from './components/Title';
+import Description from './components/Description';
+import InfoTable from './components/InfoTable';
+import OperatorAndRegion from './components/OperatorAndRegion';
+import Variations from './components/Variations';
 
 const TelNumber: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -30,11 +35,7 @@ const TelNumber: React.FC = () => {
 
   const { internationalFormat, nationalFormat } = useAppSelector(
     (state) => state.tel.formats
-    );
-
-  React.useEffect(() => {
-    dispatch(searchAdditionalInfo({ telNumber }));
-  }, [activeTel]);
+  );
 
   React.useEffect(() => {
     const telNumberEffect = async () => {
@@ -44,6 +45,7 @@ const TelNumber: React.FC = () => {
 
       setIsValidNumber(isValidValue);
       dispatch(searchTel({ telNumber }));
+      dispatch(searchAdditionalInfo({ telNumber }));
     };
 
     if (!activeTel) {
@@ -68,54 +70,64 @@ const TelNumber: React.FC = () => {
     );
   }
 
+  if (!activeTel || !additionalInfo.operator) {
+    return (
+      <>
+        <Skeleton>
+          <Title telNumber={telNumber} />
+        </Skeleton>
+
+        <Skeleton>
+          <Description
+            telNumber={telNumber}
+            internationalFormat={internationalFormat as string}
+          />
+        </Skeleton>
+
+        <Skeleton>
+          <InfoTable rating={0} viewsCount={0} />
+        </Skeleton>
+
+        <Skeleton>
+          <OperatorAndRegion
+            telNumber={telNumber}
+            internationalFormat={internationalFormat as string}
+            operator={additionalInfo.operator as string}
+            region={additionalInfo.region as string}
+          />
+        </Skeleton>
+
+        <Skeleton>
+          <Variations
+            telNumber={telNumber}
+            internationalFormat={internationalFormat as string}
+            nationalFormat={nationalFormat as string}
+          />{' '}
+        </Skeleton>
+      </>
+    );
+  }
+
   return (
     <Box>
-      <Typography
-        component="h2"
-        fontSize={28}
-        fontWeight={400}
-        sx={{ marginBottom: '0.5rem' }}
-      >
-        +7{telNumber} - кто звонил?
-      </Typography>
+      <Title telNumber={telNumber} />
 
-      <Typography fontSize={15} sx={{ marginBottom: '1rem' }}>
-        <Typography component="strong" fontSize={15} fontWeight={700}>
-          Кто звонил по номеру +7{telNumber}
-        </Typography>{' '}
-        или 8{telNumber}? Узнайте информацию по звонкам с номера телефона{' '}
-        <Typography component="strong" fontSize={15} fontWeight={700}>
-          {internationalFormat}
-        </Typography>
-        .
-      </Typography>
+      <Description
+        telNumber={telNumber}
+        internationalFormat={internationalFormat as string}
+      />
 
-      <Typography fontSize={15} sx={{ marginBottom: '1rem' }}>
-        Мы собрали самую полную информацию по номеру {internationalFormat}:
-        отзывы, оператор, какой регион, варианты набора, местоположение
-        абонента.
-      </Typography>
+      <InfoTable
+        rating={activeTel?.rating || 0}
+        viewsCount={activeTel?.viewsCount || 0}
+      />
 
-      <Box sx={{ marginBottom: '1rem' }}>
-        <TelNumberTable
-          rating={activeTel?.rating || 0}
-          viewsCount={activeTel?.viewsCount || 0}
-        />
-      </Box>
-
-      <Box sx={{ marginBottom: '1rem' }}>
-        <InfoBlock title={`Оператор номера ${internationalFormat}`}>
-          Номер +7{telNumber} принадлежит оператору {additionalInfo.operator} в регионе&nbsp;
-          {additionalInfo.region}
-        </InfoBlock>
-      </Box>
-
-      <Box sx={{ marginBottom: '1rem' }}>
-        <InfoBlock title={`Варианты написания номера ${internationalFormat}`}>
-          Возможные форматы написания этого номера: +7{telNumber}, 8{telNumber},{' '}
-          {internationalFormat}, {nationalFormat}, {telNumber}
-        </InfoBlock>
-      </Box>
+      <OperatorAndRegion
+        telNumber={telNumber}
+        internationalFormat={internationalFormat as string}
+        operator={additionalInfo.operator as string}
+        region={additionalInfo.region as string}
+      />
 
       <Box sx={{ marginBottom: '1rem' }}>
         <Activity title={`Активность номера +7${telNumber}`} />

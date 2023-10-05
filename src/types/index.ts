@@ -10,13 +10,6 @@ export interface IComment {
   category: string | null;
 }
 
-export interface ITelNumberLine {
-  id: number;
-  telNumber: string;
-  viewsCount: number;
-  commentsCount: number;
-}
-
 export interface INewReview {
   id: number;
   telNumber: string;
@@ -37,6 +30,13 @@ export interface ITel {
   viewsCount: number;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface IPreviewOfTel {
+  id: number;
+  telNumber: string;
+  viewsCount: number;
+  commentsCount: number;
 }
 
 export enum UniqueUserFields {

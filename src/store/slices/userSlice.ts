@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface IUserState {
-  loggedIn: boolean;
+  loggedIn: boolean | null;
   username: string | null;
 }
 
 const initialState: IUserState = {
-  loggedIn: false,
+  loggedIn: null,
   username: null,
 };
 
