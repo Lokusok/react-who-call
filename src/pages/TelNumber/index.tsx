@@ -1,11 +1,8 @@
 import React from 'react';
 
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import { Typography, Box, Alert, Skeleton } from '@mui/material';
-
-import TelNumberTable from '../../components/TelNumberTable';
-import InfoBlock from './components/InfoBlock';
 
 import Activity from './components/Activity';
 import CommentAddForm from '../../components/CommentAddForm';
@@ -15,6 +12,8 @@ import { resetActiveTel } from '../../store/slices/telSlice';
 import { searchTel } from '../../store/thunks/tel/searchTel';
 import { isValid } from '../../store/thunks/tel/isValid';
 import { searchAdditionalInfo } from '../../store/thunks/tel/searchAdditionalInfo';
+import { isHasComment } from '../../store/thunks/comments/isHasComment';
+import { setActive } from '../../store/thunks/comments/setActive';
 
 import { useAppDispatch, useAppSelector } from '../../store';
 import Title from './components/Title';
@@ -25,13 +24,19 @@ import Variations from './components/Variations';
 
 const TelNumber: React.FC = () => {
   const dispatch = useAppDispatch();
+
+  const user = useAppSelector((state) => state.user);
   const activeTel = useAppSelector((state) => state.tel.activeTel);
   const additionalInfo = useAppSelector((state) => state.tel.additionalInfo);
+  const activeComments = useAppSelector(
+    (state) => state.comments.activeComments
+  );
 
   const params = useParams();
 
   const telNumber = (activeTel?.telNumber || params.telNumber) as string;
   const [isValidNumber, setIsValidNumber] = React.useState(true);
+  const [isAlreadyCommented, setIsAlreadyCommented] = React.useState(false);
 
   const { internationalFormat, nationalFormat } = useAppSelector(
     (state) => state.tel.formats
@@ -54,6 +59,38 @@ const TelNumber: React.FC = () => {
   }, [activeTel, params]);
 
   React.useEffect(() => {
+    const telNumberEffect = async () => {
+      let isHasCommented = null;
+
+      // для авторизованного пользователя - проверяем комментарии на сервереs
+      if (user.loggedIn && user.id && activeTel) {
+        isHasCommented = await dispatch(
+          isHasComment({ userId: user.id, telId: activeTel.id })
+        ).unwrap();
+
+        setIsAlreadyCommented(isHasCommented);
+      }
+
+      // для не авторизованногоы
+      if (!user.loggedIn) {
+        const isCommentedStr = window.localStorage.getItem('commented');
+
+        if (isCommentedStr && JSON.parse(isCommentedStr)) {
+          setIsAlreadyCommented(true);
+        }
+      }
+    };
+
+    telNumberEffect();
+  }, [activeTel]);
+
+  React.useEffect(() => {
+    if (activeTel) {
+      dispatch(setActive({ telId: activeTel.id }));
+    }
+  }, [activeTel]);
+
+  React.useEffect(() => {
     return () => {
       dispatch(resetActiveTel());
     };
@@ -70,7 +107,7 @@ const TelNumber: React.FC = () => {
     );
   }
 
-  if (!activeTel || !additionalInfo.operator) {
+  if (!activeTel || !additionalInfo.operator || !additionalInfo.region) {
     return (
       <>
         <Skeleton>
@@ -104,6 +141,14 @@ const TelNumber: React.FC = () => {
             nationalFormat={nationalFormat as string}
           />{' '}
         </Skeleton>
+
+        <Skeleton variant="rectangular" width={200} height={30} />
+        <Skeleton
+          variant="rectangular"
+          width="80%"
+          height={300}
+          sx={{ marginTop: '1rem' }}
+        />
       </>
     );
   }
@@ -145,11 +190,27 @@ const TelNumber: React.FC = () => {
       </Box>
 
       <Box sx={{ marginBottom: '2rem' }}>
-        <CommentAddForm />
+        {isAlreadyCommented ? (
+          <Alert severity={'info'} sx={{ width: '100%' }}>
+            Вы уже прокомментировали данный номер.
+          </Alert>
+        ) : (
+          <CommentAddForm telId={activeTel.id} />
+        )}
+
+        {isAlreadyCommented && !user.loggedIn && (
+          <Alert severity={'warning'} sx={{ width: '100%', marginTop: '1rem' }}>
+            Не авторизованным пользователям доступен только 1 комментарий.
+            Авторизуйтесь по <Link to={'/login'}>ссылке</Link>
+          </Alert>
+        )}
       </Box>
 
       <Box>
-        <CommentsList telNumber={telNumber as string} />
+        <CommentsList
+          comments={activeComments}
+          telNumber={telNumber as string}
+        />
       </Box>
     </Box>
   );

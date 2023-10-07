@@ -10,10 +10,6 @@ import LogoutButton from '../LogoutButton';
 const ProfileLink: React.FC = () => {
   const { username, loggedIn } = useAppSelector((state) => state.user);
 
-  React.useEffect(() => {
-    console.log({ loggedIn });
-  }, [loggedIn]);
-
   return (
     <>
       {loggedIn ? (

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { setLoggedIn, setUsername } from '../../slices/userSlice';
+import { setUserId, setLoggedIn, setUsername } from '../../slices/userSlice';
 
 import { setLogout } from '../statuses/setLogout';
 
@@ -11,6 +11,7 @@ export const userLogout = createAsyncThunk(
   async (_, { dispatch }) => {
     window.localStorage.removeItem('token');
 
+    dispatch(setUserId(null));
     dispatch(setLoggedIn(false));
     dispatch(setUsername(null));
 

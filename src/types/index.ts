@@ -4,10 +4,8 @@ export interface IComment {
   date: string;
   time: string;
   telNumber?: string;
-  viewsCount?: number;
-  commentsCount?: number;
   description: string;
-  category: string | null;
+  type: string | null;
 }
 
 export interface INewReview {
@@ -53,4 +51,16 @@ export enum StatusesStates {
 export enum TypesOfStatuses {
   Register = 'register',
   Login = 'login',
+}
+
+export enum CallTypesEnum {
+  InviteStr = 'Выберите тип',
+  Другое = 'Другое',
+  Мошенники = 'Мошенники',
+  Реклама = 'Реклама',
+  Коллекторы = 'Коллекторы',
+  Опросы = 'Опросы',
+  Хулиганы = 'Хулиганы',
+  'Колл-центр' = 'Колл-центр',
+  Неадекваты = 'Неадекваты ',
 }

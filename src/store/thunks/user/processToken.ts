@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { setLoggedIn, setUsername } from '../../slices/userSlice';
+import { setUserId, setLoggedIn, setUsername } from '../../slices/userSlice';
 import { userAPI } from '../../../api';
 
 interface ProcessTokenProps {
@@ -15,10 +15,11 @@ const processToken = createAsyncThunk<boolean, ProcessTokenProps>(
         token,
       });
 
-      const userData = response.data;
+      const { id: userId, username } = response.data;
 
+      dispatch(setUserId(userId));
       dispatch(setLoggedIn(true));
-      dispatch(setUsername(userData.username));
+      dispatch(setUsername(username));
 
       return true;
     } catch (err) {

@@ -11,3 +11,7 @@ export const telAPI = axios.create({
 export const telOuterAPI = axios.create({
   baseURL: 'https://num.voxlink.ru/',
 });
+
+export const commentsAPI = axios.create({
+  baseURL: 'http://localhost:5500/comments',
+});

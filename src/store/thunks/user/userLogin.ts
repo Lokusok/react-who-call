@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { setLoggedIn, setUsername } from '../../slices/userSlice';
+import { setUserId, setLoggedIn, setUsername } from '../../slices/userSlice';
 import { setLogin } from '../statuses/setLogin';
 
 import { userAPI } from '../../../api';
@@ -28,15 +28,17 @@ export const userLogin = createAsyncThunk<
       password,
       remember,
     });
-    const { result, username, rememberUser, token } = response.data;
+    const { id: userId, result, username, rememberUser, token } = response.data;
 
     if (token) {
       window[rememberUser ? 'localStorage' : 'sessionStorage'].setItem(
         'token',
         token
       );
+      window.localStorage.removeItem('commented');
     }
 
+    dispatch(setUserId(userId));
     dispatch(setLoggedIn(result));
     dispatch(setUsername(username));
 

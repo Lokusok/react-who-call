@@ -17,17 +17,11 @@ import {
 } from '@mui/material';
 import { blue } from '@mui/material/colors';
 
-enum CallTypesEnum {
-  InviteStr = 'Выберите тип',
-  Другое = 'Другое',
-  Мошенники = 'Мошенники',
-  Реклама = 'Реклама',
-  Коллекторы = 'Коллекторы',
-  Опросы = 'Опросы',
-  Хулиганы = 'Хулиганы',
-  'Колл-центр' = 'Колл-центр',
-  Неадекваты = 'Неадекваты ',
-}
+import { useAppDispatch, useAppSelector } from '../../store';
+import { addComment } from '../../store/thunks/comments/addComment';
+import { setActive } from '../../store/thunks/comments/setActive';
+
+import { CallTypesEnum } from '../../types';
 
 interface ICommentAddFormInputs {
   description: string;
@@ -36,12 +30,43 @@ interface ICommentAddFormInputs {
   rating: number;
 }
 
-const CommentAddForm: React.FC = () => {
-  const { register, handleSubmit, setValue, reset } =
-    useForm<ICommentAddFormInputs>();
+interface CommentAddFormProps {
+  telId: number;
+}
 
-  const addComment: SubmitHandler<ICommentAddFormInputs> = (data) => {
-    console.log({ data });
+const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((store) => store.user);
+
+  const { register, handleSubmit, setValue, reset, watch } =
+    useForm<ICommentAddFormInputs>({
+      defaultValues: {
+        username: user.username || '',
+        type: CallTypesEnum.InviteStr,
+        rating: 0,
+      },
+    });
+
+  const onSubmit: SubmitHandler<ICommentAddFormInputs> = async (data) => {
+    const token = window.localStorage.getItem('token');
+
+    await dispatch(
+      addComment({
+        token: token,
+        username: data.username,
+        telId,
+        description: data.description,
+        type: data.type,
+        rating: data.rating,
+      })
+    );
+    await dispatch(setActive({ telId }));
+
+    if (!token) {
+      window.localStorage.setItem('commented', JSON.stringify(true));
+    }
+
+    setValue('rating', 0);
     reset();
   };
 
@@ -54,7 +79,7 @@ const CommentAddForm: React.FC = () => {
       </Box>
 
       <Box sx={{ padding: '0.5rem 1rem', paddingBottom: '1.5rem' }}>
-        <form onSubmit={handleSubmit(addComment)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Grid
             container
             columnSpacing={{ xs: 0, sm: 2, md: 6, lg: 12 }}
@@ -102,6 +127,7 @@ const CommentAddForm: React.FC = () => {
                         padding: 0,
                       },
                     }}
+                    disabled={user.loggedIn || false}
                     {...register('username')}
                     required
                   />
@@ -132,18 +158,9 @@ const CommentAddForm: React.FC = () => {
                     }}
                     {...register('type', {
                       required: true,
-                      validate: {
-                        isSelected: (value) => {
-                          console.log({ value });
-                          return value !== CallTypesEnum.InviteStr;
-                        },
-                      },
                     })}
                     required
                   >
-                    <option selected disabled value={CallTypesEnum.InviteStr}>
-                      {CallTypesEnum.InviteStr}
-                    </option>
                     {Object.keys(CallTypesEnum)
                       .slice(1)
                       .map((callType) => (
@@ -165,6 +182,7 @@ const CommentAddForm: React.FC = () => {
                 <FormLabel>Оценка:</FormLabel>
                 <Rating
                   max={5}
+                  value={watch('rating')}
                   onChange={(_, newValue) =>
                     setValue('rating', newValue as number)
                   }

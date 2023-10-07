@@ -9,7 +9,6 @@ const setCommented = createAsyncThunk(
   async (_, { dispatch }) => {
     const response = await telAPI.get('/get-most-commented');
 
-    console.log({ mostCommented: response.data });
     dispatch(setMostCommented(response.data));
   }
 );

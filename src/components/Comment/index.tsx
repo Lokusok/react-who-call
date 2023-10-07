@@ -10,7 +10,10 @@ import { IComment } from '../../types';
 import ViewsCount from '../ViewsCount';
 import CommentsCount from '../CommentsCount';
 
-interface CommentProps extends IComment {}
+interface CommentProps extends IComment {
+  viewsCount?: number;
+  commentsCount?: number;
+}
 
 const Comment: React.FC<CommentProps> = ({
   username,
@@ -20,7 +23,7 @@ const Comment: React.FC<CommentProps> = ({
   viewsCount,
   commentsCount,
   description,
-  category,
+  type,
 }) => {
   return (
     <Box
@@ -95,13 +98,13 @@ const Comment: React.FC<CommentProps> = ({
           <Typography fontSize={14} sx={{ marginBottom: '8px' }}>
             {description}
 
-            {category && (
+            {type && (
               <Typography
                 component="strong"
                 fontSize={14}
                 sx={{ color: grey[400], marginLeft: '4px' }}
               >
-                {category}
+                {type}
               </Typography>
             )}
           </Typography>

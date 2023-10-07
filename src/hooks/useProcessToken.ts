@@ -12,7 +12,6 @@ const useProcessToken = (dispatch: AppDispatch) => {
 
       let result = null;
 
-      console.log(token);
       if (token) {
         result = await dispatch(processToken({ token })).unwrap();
       } else {

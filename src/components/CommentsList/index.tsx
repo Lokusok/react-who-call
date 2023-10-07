@@ -4,15 +4,14 @@ import { Box, Typography, Stack } from '@mui/material';
 
 import Comment from '../Comment';
 
-import { mockReviews } from '../../api/mock';
+import { IComment } from '../../types';
 
 interface CommentsListProps {
   telNumber: string;
+  comments: IComment[] | [] | null;
 }
 
-const CommentsList: React.FC<CommentsListProps> = ({ telNumber }) => {
-  const reviews = mockReviews[telNumber];
-
+const CommentsList: React.FC<CommentsListProps> = ({ telNumber, comments }) => {
   return (
     <>
       <Box>
@@ -21,24 +20,24 @@ const CommentsList: React.FC<CommentsListProps> = ({ telNumber }) => {
         </Typography>
       </Box>
 
-      {reviews && (
+      {comments && (
         <Stack direction="column" spacing={2.5}>
-          {reviews.map((review) => (
+          {comments.map((comment) => (
             <Box>
               <Comment
-                id={review.id}
-                username={review.username}
-                description={review.description}
-                date={review.date}
-                time={review.time}
-                category={review.category}
+                id={comment.id}
+                username={comment.username}
+                description={comment.description}
+                date={comment.date}
+                time={comment.time}
+                type={comment.type}
               />
             </Box>
           ))}
         </Stack>
       )}
 
-      {!reviews && (
+      {comments && !comments.length && (
         <Typography>
           Комментариев пока нет. Будьте первым, кто оставит отзыв на этот номер!
         </Typography>
