@@ -17,8 +17,6 @@ export const setActive = createAsyncThunk<void, SetActiveProps>(
       },
     });
 
-    console.log({ comments: response.data });
-
     dispatch(setActiveComments(response.data));
   }
 );

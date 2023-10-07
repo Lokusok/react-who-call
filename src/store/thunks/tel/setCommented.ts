@@ -4,7 +4,7 @@ import { setMostCommented } from '../../slices/telSlice';
 
 import { telAPI } from '../../../api';
 
-const setCommented = createAsyncThunk(
+export const setCommented = createAsyncThunk(
   'tel/setCommented',
   async (_, { dispatch }) => {
     const response = await telAPI.get('/get-most-commented');
@@ -12,5 +12,3 @@ const setCommented = createAsyncThunk(
     dispatch(setMostCommented(response.data));
   }
 );
-
-export default setCommented;

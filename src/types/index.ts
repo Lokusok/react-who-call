@@ -8,12 +8,10 @@ export interface IComment {
   type: string | null;
 }
 
-export interface INewReview {
-  id: number;
-  telNumber: string;
-  category: string | null;
-  commentsCount: number;
-  reviewText: string;
+export interface INewComment extends IComment {
+  Tel: {
+    telNumber: string;
+  };
 }
 
 export interface IStatisticPoint {

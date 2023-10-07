@@ -15,8 +15,7 @@ interface AddCommentProps {
 
 export const addComment = createAsyncThunk<void, AddCommentProps>(
   'comments/addComment',
-  async (payload, thunkAPI) => {
-    const response = await commentsAPI.post('/new', payload);
-    console.log({ response });
+  async (payload) => {
+    await commentsAPI.post('/new', payload);
   }
 );

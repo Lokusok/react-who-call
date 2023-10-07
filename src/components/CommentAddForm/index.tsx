@@ -164,7 +164,7 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
                     {Object.keys(CallTypesEnum)
                       .slice(1)
                       .map((callType) => (
-                        <option value={callType}>
+                        <option key={callType} value={callType}>
                           {
                             CallTypesEnum[
                               callType as keyof typeof CallTypesEnum

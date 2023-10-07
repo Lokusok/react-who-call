@@ -7,18 +7,15 @@ import { grey } from '@mui/material/colors';
 
 import CommentsCount from '../../CommentsCount';
 
-interface NewReviewProps {
-  telNumber: string;
-  category: string | null;
-  commentsCount: number;
-  reviewText: string;
-}
+import { INewComment } from '../../../types';
 
-const NewReview: React.FC<NewReviewProps> = ({
+interface NewCommentProps extends INewComment {}
+
+const NewComment: React.FC<NewCommentProps> = ({
   telNumber,
-  category,
-  commentsCount,
-  reviewText,
+  type,
+  telCommentsCount,
+  description,
 }) => {
   return (
     <Box sx={{ border: `1px solid ${grey[400]}`, borderRadius: '5px' }}>
@@ -41,19 +38,19 @@ const NewReview: React.FC<NewReviewProps> = ({
             </Link>
 
             <Typography color={grey[400]} fontSize={13}>
-              {category}
+              {type}
             </Typography>
           </Stack>
 
-          <CommentsCount count={commentsCount} />
+          <CommentsCount count={telCommentsCount} />
         </Stack>
       </Box>
 
       <Box sx={{ padding: '0.5rem 0.7rem' }}>
-        <Typography fontSize={13}>{reviewText}</Typography>
+        <Typography fontSize={13}>{description}</Typography>
       </Box>
     </Box>
   );
 };
 
-export default NewReview;
+export default NewComment;

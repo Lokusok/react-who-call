@@ -1,13 +1,15 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { IComment } from '../../types';
+import { IComment, INewComment } from '../../types';
 
 interface ICommentsState {
   activeComments: IComment[] | [] | null;
+  newComments: INewComment[] | [] | null;
 }
 
 const initialState: ICommentsState = {
   activeComments: null,
+  newComments: null,
 };
 
 const commentsSlice = createSlice({
@@ -17,9 +19,13 @@ const commentsSlice = createSlice({
     setActiveComments(state, action: PayloadAction<IComment[] | [] | null>) {
       state.activeComments = action.payload;
     },
+
+    setNewComments(state, action: PayloadAction<INewComment[] | [] | null>) {
+      state.newComments = action.payload;
+    },
   },
 });
 
-export const { setActiveComments } = commentsSlice.actions;
+export const { setActiveComments, setNewComments } = commentsSlice.actions;
 
 export default commentsSlice.reducer;

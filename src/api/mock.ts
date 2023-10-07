@@ -1,4 +1,4 @@
-import { IComment, INewReview, IStatisticPoint } from '../types';
+import { IComment, IStatisticPoint } from '../types';
 
 export const dataComments: IComment[] = [
   {
@@ -113,40 +113,6 @@ export const dataComments: IComment[] = [
     commentsCount: 2,
     description: 'Положительный звонок, сервисное обслуживание',
     category: null,
-  },
-];
-
-export const newReviews: INewReview[] = [
-  {
-    id: 1,
-    telNumber: '9672163843',
-    category: null,
-    commentsCount: 3,
-    reviewText: 'Воскресный звонок. В трубке - гудки.',
-  },
-
-  {
-    id: 2,
-    telNumber: '3472324018',
-    category: 'Реклама',
-    commentsCount: 1,
-    reviewText: 'Ростелеком робот',
-  },
-
-  {
-    id: 3,
-    telNumber: '9274064037',
-    category: 'Мошенники',
-    commentsCount: 1,
-    reviewText: 'Бросили трубку, тюремные вымогатели херовы.',
-  },
-
-  {
-    id: 4,
-    telNumber: '9250414178',
-    category: null,
-    commentsCount: 2,
-    reviewText: 'Предлагают работу',
   },
 ];
 

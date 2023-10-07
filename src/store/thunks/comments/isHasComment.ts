@@ -20,8 +20,6 @@ export const isHasComment = createAsyncThunk<boolean, isHasCommentProps>(
       }
     );
 
-    console.log({ isCommented: response.data });
-
     return response.data;
   }
 );
