@@ -38,7 +38,7 @@ const TelNumber: React.FC = () => {
   const telNumber = params.telNumber as string;
   const [isValidNumber, setIsValidNumber] = React.useState(true);
   const [isAlreadyCommented, setIsAlreadyCommented] = React.useState(false);
-  const [dataIsLoading, setDataIsLoading] = React.useState(false);
+  const [dataIsLoading, setDataIsLoading] = React.useState(true);
 
   const { internationalFormat, nationalFormat } = useAppSelector(
     (state) => state.tel.formats
@@ -60,11 +60,11 @@ const TelNumber: React.FC = () => {
       dispatch(searchAdditionalInfo({ telNumber }));
       setIsValidNumber(isValidValue);
 
-      setDataIsLoading(true);
+      setDataIsLoading(false);
     };
 
     if (
-      (!activeTel && !dataIsLoading) ||
+      (!activeTel && dataIsLoading) ||
       activeTel?.telNumber !== params.telNumber
     ) {
       telNumberEffect();
