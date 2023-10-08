@@ -2,6 +2,9 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import { commentsAPI } from '../../../api';
 
+import { setActive } from './setActive';
+import { setNew } from './setNew';
+
 import { CallTypesEnum } from '../../../types';
 
 interface AddCommentProps {
@@ -15,7 +18,9 @@ interface AddCommentProps {
 
 export const addComment = createAsyncThunk<void, AddCommentProps>(
   'comments/addComment',
-  async (payload) => {
+  async (payload, { dispatch }) => {
     await commentsAPI.post('/new', payload);
+    await dispatch(setActive({ telId: payload.telId }));
+    await dispatch(setNew({ limit: 10 }));
   }
 );

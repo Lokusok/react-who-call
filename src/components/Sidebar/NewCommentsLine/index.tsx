@@ -40,9 +40,9 @@ const NewCommentsLine: React.FC<NewCommentsLineProps> = ({ newComments }) => {
       <Typography sx={{ marginBottom: '0.5rem' }}>Новые отзывы</Typography>
 
       <Stack direction="column" spacing={2}>
-        {!newComments ? (
+        {!newComments || !newComments.length ? (
           <Alert severity={'info'}>
-            <Typography>Нет новых комментариев</Typography>
+            <Typography>Нет новых отзывов</Typography>
           </Alert>
         ) : (
           <>

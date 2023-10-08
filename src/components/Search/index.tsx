@@ -15,7 +15,7 @@ import {
 import { grey } from '@mui/material/colors';
 
 import { useAppDispatch } from '../../store';
-import { resetActiveTel } from '../../store/slices/telSlice';
+import { resetActiveInfoAll } from '../../store/slices/telSlice';
 
 interface SearchInputs {
   telNumber: string;
@@ -40,7 +40,7 @@ const Search: React.FC = () => {
     navigate(`/tel/${data.telNumber}`);
     reset();
 
-    dispatch(resetActiveTel());
+    dispatch(resetActiveInfoAll());
   };
 
   return (

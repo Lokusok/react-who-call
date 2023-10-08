@@ -8,11 +8,15 @@ interface IsValidProps {
 
 export const isValid = createAsyncThunk<boolean, IsValidProps>(
   'tel/isValid',
-  async ({ telNumber }, thunkAPI) => {
-    const response = await telAPI.post('isValid', {
-      telNumber,
-    });
+  async ({ telNumber }) => {
+    try {
+      const response = await telAPI.post('/is-valid', {
+        telNumber,
+      });
 
-    return response.data;
+      return response.data;
+    } catch (err) {
+      return false;
+    }
   }
 );

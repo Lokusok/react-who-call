@@ -6,13 +6,14 @@ import { telAPI } from '../../../api';
 import { standartifyFormats } from './standartifyFormats';
 
 interface SearchTelAndSetProps {
-  telNumber: string;
+  telNumber?: string;
+  telId?: number;
 }
 
 export const searchTel = createAsyncThunk<ITel, SearchTelAndSetProps>(
   'tel/searchTelAndSet',
-  async ({ telNumber }, { dispatch }) => {
-    const response = await telAPI.post('/search', { search: telNumber });
+  async ({ telNumber, telId }, { dispatch }) => {
+    const response = await telAPI.post('/search', { search: telNumber, telId });
 
     if (response.data) {
       const resTelNumber = response.data.telNumber;

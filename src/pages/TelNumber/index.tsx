@@ -8,12 +8,13 @@ import Activity from './components/Activity';
 import CommentAddForm from '../../components/CommentAddForm';
 import CommentsList from '../../components/CommentsList';
 
-import { resetActiveTel } from '../../store/slices/telSlice';
+import { resetActiveInfoAll } from '../../store/slices/telSlice';
 import { searchTel } from '../../store/thunks/tel/searchTel';
 import { isValid } from '../../store/thunks/tel/isValid';
 import { searchAdditionalInfo } from '../../store/thunks/tel/searchAdditionalInfo';
 import { isHasComment } from '../../store/thunks/comments/isHasComment';
 import { setActive } from '../../store/thunks/comments/setActive';
+import { incrementViewsCount } from '../../store/thunks/tel/incrementViewsCount';
 
 import { useAppDispatch, useAppSelector } from '../../store';
 import Title from './components/Title';
@@ -34,13 +35,20 @@ const TelNumber: React.FC = () => {
 
   const params = useParams();
 
-  const telNumber = (activeTel?.telNumber || params.telNumber) as string;
+  const telNumber = params.telNumber as string;
   const [isValidNumber, setIsValidNumber] = React.useState(true);
   const [isAlreadyCommented, setIsAlreadyCommented] = React.useState(false);
+  const [dataIsLoading, setDataIsLoading] = React.useState(false);
 
   const { internationalFormat, nationalFormat } = useAppSelector(
     (state) => state.tel.formats
   );
+
+  React.useEffect(() => {
+    return () => {
+      dispatch(resetActiveInfoAll());
+    };
+  }, []);
 
   React.useEffect(() => {
     const telNumberEffect = async () => {
@@ -48,21 +56,26 @@ const TelNumber: React.FC = () => {
         isValid({ telNumber })
       ).unwrap();
 
-      setIsValidNumber(isValidValue);
       dispatch(searchTel({ telNumber }));
       dispatch(searchAdditionalInfo({ telNumber }));
+      setIsValidNumber(isValidValue);
+
+      setDataIsLoading(true);
     };
 
-    if (!activeTel) {
+    if (
+      (!activeTel && !dataIsLoading) ||
+      activeTel?.telNumber !== params.telNumber
+    ) {
       telNumberEffect();
     }
-  }, [activeTel, params]);
+  }, [params]);
 
   React.useEffect(() => {
     const telNumberEffect = async () => {
       let isHasCommented = null;
 
-      // для авторизованного пользователя - проверяем комментарии на сервереs
+      // для авторизованного пользователя - проверяем комментарии на сервере
       if (user.loggedIn && user.id && activeTel) {
         isHasCommented = await dispatch(
           isHasComment({ userId: user.id, telId: activeTel.id })
@@ -71,7 +84,7 @@ const TelNumber: React.FC = () => {
         setIsAlreadyCommented(isHasCommented);
       }
 
-      // для не авторизованногоы
+      // для неавторизованного
       if (!user.loggedIn) {
         const isCommentedStr = window.localStorage.getItem('commented');
 
@@ -82,19 +95,14 @@ const TelNumber: React.FC = () => {
     };
 
     telNumberEffect();
-  }, [activeTel]);
+  }, [activeTel, activeComments]);
 
   React.useEffect(() => {
     if (activeTel) {
       dispatch(setActive({ telId: activeTel.id }));
+      dispatch(incrementViewsCount({ telId: activeTel.id }));
     }
   }, [activeTel]);
-
-  React.useEffect(() => {
-    return () => {
-      dispatch(resetActiveTel());
-    };
-  }, []);
 
   if (!isValidNumber) {
     return (
@@ -200,7 +208,7 @@ const TelNumber: React.FC = () => {
 
         {isAlreadyCommented && !user.loggedIn && (
           <Alert severity={'warning'} sx={{ width: '100%', marginTop: '1rem' }}>
-            Не авторизованным пользователям доступен только 1 комментарий.
+            Неавторизованным пользователям доступен только 1 комментарий.
             Авторизуйтесь по <Link to={'/login'}>ссылке</Link>
           </Alert>
         )}

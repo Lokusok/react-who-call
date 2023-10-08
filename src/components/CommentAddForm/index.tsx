@@ -50,6 +50,10 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
   const onSubmit: SubmitHandler<ICommentAddFormInputs> = async (data) => {
     const token = window.localStorage.getItem('token');
 
+    if (!token) {
+      window.localStorage.setItem('commented', JSON.stringify(true));
+    }
+
     await dispatch(
       addComment({
         token: token,
@@ -60,11 +64,6 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
         rating: data.rating,
       })
     );
-    await dispatch(setActive({ telId }));
-
-    if (!token) {
-      window.localStorage.setItem('commented', JSON.stringify(true));
-    }
 
     setValue('rating', 0);
     reset();

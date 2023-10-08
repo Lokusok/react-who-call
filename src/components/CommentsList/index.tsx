@@ -23,7 +23,7 @@ const CommentsList: React.FC<CommentsListProps> = ({ telNumber, comments }) => {
       {comments && (
         <Stack direction="column" spacing={2.5}>
           {comments.map((comment) => (
-            <Box>
+            <Box key={comment.id}>
               <Comment
                 id={comment.id}
                 username={comment.username}

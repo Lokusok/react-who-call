@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { ITel, IPreviewOfTel } from '../../types';
 
 import { searchTel } from '../thunks/tel/searchTel';
+import { incrementViewsCount } from '../thunks/tel/incrementViewsCount';
 
 interface ITelFormats {
   internationalFormat: string | null;
@@ -42,8 +43,10 @@ const telSlice = createSlice({
   name: 'tel',
   initialState,
   reducers: {
-    resetActiveTel(state) {
+    resetActiveInfoAll(state) {
       state.activeTel = null;
+      state.formats = { internationalFormat: null, nationalFormat: null };
+      state.additionalInfo = { operator: null, region: null };
     },
 
     setFormats(state, action: PayloadAction<ITelFormats>) {
@@ -75,11 +78,20 @@ const telSlice = createSlice({
         state.activeTel = action.payload;
       }
     );
+
+    builder.addCase(
+      incrementViewsCount.fulfilled,
+      (state, action: PayloadAction<ITel | void>) => {
+        if (state.activeTel?.viewsCount && action.payload) {
+          state.activeTel.viewsCount = action.payload.viewsCount;
+        }
+      }
+    );
   },
 });
 
 export const {
-  resetActiveTel,
+  resetActiveInfoAll,
   setFormats,
   setAdditionalInfo,
   setLastVerified,
