@@ -9,9 +9,9 @@ import { setNew } from '../store/thunks/comments/setNew';
 
 const useUsefulInfo = (dispatch: AppDispatch) => {
   React.useEffect(() => {
-    dispatch(setVerified());
-    dispatch(setViewed());
-    dispatch(setCommented());
+    dispatch(setVerified({ limit: 10 }));
+    dispatch(setViewed({ limit: 10 }));
+    dispatch(setCommented({ limit: 10 }));
     dispatch(setNew({ limit: 10 }));
   }, []);
 };

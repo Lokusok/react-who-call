@@ -4,10 +4,18 @@ import { setLastVerified } from '../../slices/telSlice';
 
 import { telAPI } from '../../../api';
 
-export const setVerified = createAsyncThunk(
+interface SetVerifiedProps {
+  limit: number;
+}
+
+export const setVerified = createAsyncThunk<void, SetVerifiedProps>(
   'tel/setVerified',
-  async (_, { dispatch }) => {
-    const response = await telAPI.get('/get-last-verified');
+  async ({ limit }, { dispatch }) => {
+    const response = await telAPI.get('/get-last-verified', {
+      params: {
+        limit,
+      },
+    });
 
     dispatch(setLastVerified(response.data));
   }

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Typography, Stack, Alert, Skeleton } from '@mui/material';
 
-import { INewComment } from '../../../types';
+import { INewComment, CallTypesEnum } from '../../../types';
 
 import NewComment from '../NewComment';
 
@@ -50,8 +50,8 @@ const NewCommentsLine: React.FC<NewCommentsLineProps> = ({ newComments }) => {
               <NewComment
                 key={comment.id}
                 telNumber={comment.Tel.telNumber}
-                telCommentsCount={comment.commentsCount}
-                type={comment.type}
+                telCommentsCount={comment.telCommentsCount as number}
+                type={comment.type as CallTypesEnum}
                 description={comment.description}
               />
             ))}

@@ -6,6 +6,9 @@ export interface IComment {
   telNumber?: string;
   description: string;
   type: string | null;
+  UserId?: number;
+  TelId?: number;
+  telCommentsCount?: number;
 }
 
 export interface INewComment extends IComment {

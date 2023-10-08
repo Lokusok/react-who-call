@@ -4,10 +4,18 @@ import { setMostCommented } from '../../slices/telSlice';
 
 import { telAPI } from '../../../api';
 
-export const setCommented = createAsyncThunk(
+interface SetCommentedProps {
+  limit: number;
+}
+
+export const setCommented = createAsyncThunk<void, SetCommentedProps>(
   'tel/setCommented',
-  async (_, { dispatch }) => {
-    const response = await telAPI.get('/get-most-commented');
+  async ({ limit }, { dispatch }) => {
+    const response = await telAPI.get('/get-most-commented', {
+      params: {
+        limit,
+      },
+    });
 
     dispatch(setMostCommented(response.data));
   }

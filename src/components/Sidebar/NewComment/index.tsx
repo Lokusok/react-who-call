@@ -7,9 +7,14 @@ import { grey } from '@mui/material/colors';
 
 import CommentsCount from '../../CommentsCount';
 
-import { INewComment } from '../../../types';
+import { CallTypesEnum } from '../../../types';
 
-interface NewCommentProps extends INewComment {}
+interface NewCommentProps {
+  telNumber: string;
+  type: CallTypesEnum;
+  telCommentsCount: number;
+  description: string;
+}
 
 const NewComment: React.FC<NewCommentProps> = ({
   telNumber,
@@ -25,7 +30,7 @@ const NewComment: React.FC<NewCommentProps> = ({
           borderBottom: `1px solid ${grey[400]}`,
         }}
       >
-        <Stack direction="row" justifyContent="space-between">
+        <Stack direction="row" spacing={1.5} justifyContent="space-between">
           <Stack direction="row" spacing={1} alignItems="center">
             <Link
               component={RouterLink}
@@ -42,7 +47,7 @@ const NewComment: React.FC<NewCommentProps> = ({
             </Typography>
           </Stack>
 
-          <CommentsCount count={telCommentsCount} />
+          <CommentsCount count={telCommentsCount as number} />
         </Stack>
       </Box>
 
