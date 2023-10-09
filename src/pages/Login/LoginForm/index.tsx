@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 
 import {
@@ -15,7 +15,6 @@ import { styled } from '@mui/material/styles';
 
 import Form from '../../components/Form';
 import Invite from '../../components/Invite';
-import Error from '../../components/Form/Error';
 
 import ButtonSuccess from '../../components/styled/ButtonSuccess';
 import Input from '../../components/styled/Input';
@@ -40,19 +39,13 @@ interface LoginFormInputs {
 
 const LoginForm: React.FC = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors },
-  } = useForm<LoginFormInputs>({
+  const { register, handleSubmit } = useForm<LoginFormInputs>({
     reValidateMode: 'onBlur',
   });
 
   const loginUser: SubmitHandler<LoginFormInputs> = async (data) => {
-    const result = await dispatch(
+    await dispatch(
       userLogin({
         email: data.email,
         password: data.password,

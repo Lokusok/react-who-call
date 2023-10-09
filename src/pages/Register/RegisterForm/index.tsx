@@ -103,7 +103,7 @@ const RegisterForm: React.FC = () => {
             type="email"
             required
           />
-          <Error>{errors.email && errors.email.message}</Error>
+          <Error>{errors?.email?.message}</Error>
         </Stack>
 
         <Stack direction="column" spacing={1}>
@@ -116,13 +116,21 @@ const RegisterForm: React.FC = () => {
                   'Данный никнейм уже используется другим пользователем'
                 ),
               },
+              minLength: {
+                value: 2,
+                message: 'Минимум 2 символа',
+              },
+              maxLength: {
+                value: 10,
+                message: 'Максимум 10 символов',
+              },
             })}
             name="username"
             id="username"
             type="text"
             required
           />
-          <Error>{errors.username && errors.username.message}</Error>
+          <Error>{errors?.username?.message}</Error>
         </Stack>
 
         <Stack direction="column" spacing={1}>
@@ -157,9 +165,7 @@ const RegisterForm: React.FC = () => {
             id="confirmPassword"
             type="password"
           />
-          <Error>
-            {errors.confirmPassword && errors.confirmPassword.message}
-          </Error>
+          <Error>{errors?.confirmPassword?.message}</Error>
         </Stack>
 
         <Stack>

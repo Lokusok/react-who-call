@@ -38,14 +38,24 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user);
 
-  const { register, handleSubmit, setValue, reset, watch } =
-    useForm<ICommentAddFormInputs>({
-      defaultValues: {
-        username: user.username || '',
-        type: CallTypesEnum.InviteStr,
-        rating: 0,
-      },
-    });
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    watch,
+    formState: { errors },
+  } = useForm<ICommentAddFormInputs>({
+    defaultValues: {
+      username: user.username || '',
+      type: CallTypesEnum.InviteStr,
+      rating: 0,
+    },
+  });
+
+  React.useEffect(() => {
+    console.log(errors, '<----');
+  });
 
   const onSubmit: SubmitHandler<ICommentAddFormInputs> = async (data) => {
     const token = window.localStorage.getItem('token');
@@ -115,22 +125,40 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
               <Stack direction="row" alignItems="center" spacing={4}>
                 <FormLabel htmlFor="username">Имя:</FormLabel>
 
-                <FormControl fullWidth>
-                  <TextField
-                    id="username"
-                    placeholder="Имя"
-                    sx={{ '& .MuiInputBase-root': { padding: '0.75rem' } }}
-                    inputProps={{
-                      sx: {
-                        fontSize: '15px',
-                        padding: 0,
-                      },
-                    }}
-                    disabled={user.loggedIn || false}
-                    {...register('username')}
-                    required
-                  />
-                </FormControl>
+                <Stack direction="column" spacing={0.5} sx={{ width: '100%' }}>
+                  <FormControl fullWidth>
+                    <TextField
+                      id="username"
+                      placeholder="Имя"
+                      sx={{ '& .MuiInputBase-root': { padding: '0.75rem' } }}
+                      inputProps={{
+                        sx: {
+                          fontSize: '15px',
+                          padding: 0,
+                        },
+                      }}
+                      disabled={user.loggedIn || false}
+                      {...register('username', {
+                        maxLength: {
+                          value: 10,
+                          message: 'Не более 10 символов',
+                        },
+
+                        minLength: {
+                          value: 2,
+                          message: 'Минимум 2 символа',
+                        },
+                      })}
+                      required
+                    />
+                  </FormControl>
+
+                  {errors?.username?.message && (
+                    <Typography sx={{ textDecoration: 'underline' }}>
+                      {errors?.username?.message}
+                    </Typography>
+                  )}
+                </Stack>
               </Stack>
             </Grid>
 
@@ -144,9 +172,7 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
                 </FormLabel>
 
                 <FormControl fullWidth>
-                  <InputLabel id="category-call-label" sx={{ top: '-4.5px' }}>
-                    Тип звонка
-                  </InputLabel>
+                  <InputLabel id="category-call-label">Тип звонка</InputLabel>
                   <Select
                     native={true}
                     labelId="category-call-label"
