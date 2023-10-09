@@ -12,7 +12,7 @@ const useRedirectOnActiveTelNumber = () => {
     const telNumber = activeTelNumber?.telNumber;
 
     if (telNumber) {
-      navigate(`/tel/${telNumber}`);
+      navigate(`/tel/${telNumber}`, { replace: true });
     }
   }, [activeTelNumber]);
 };

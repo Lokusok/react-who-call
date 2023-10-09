@@ -27,13 +27,14 @@ const Main: React.FC = () => {
           justifyContent: { xs: 'center', md: 'stretch' },
         }}
       >
-        <Grid item xs={12} md={telNumber ? 9 : 8}>
+        <Grid item xs={12} md={8} lg={telNumber ? 9 : 8}>
           <Outlet />
         </Grid>
 
         <Grid
           item
-          md={telNumber ? 3 : 4}
+          md={4}
+          lg={telNumber ? 3 : 4}
           sx={{ marginBottom: { xs: '2rem', md: 0 } }}
         >
           <Sidebar />

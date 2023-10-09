@@ -4,24 +4,24 @@ import { useParams, Link } from 'react-router-dom';
 
 import { Typography, Box, Alert, Skeleton } from '@mui/material';
 
-import Activity from './components/Activity';
-import CommentAddForm from '../../components/CommentAddForm';
-import CommentsList from '../../components/CommentsList';
-
 import { resetActiveInfoAll } from '../../store/slices/telSlice';
 import { searchTel } from '../../store/thunks/tel/searchTel';
 import { isValid } from '../../store/thunks/tel/isValid';
+import { minifyTelNumber } from '../../store/thunks/tel/minifyTelNumber';
 import { searchAdditionalInfo } from '../../store/thunks/tel/searchAdditionalInfo';
 import { isHasComment } from '../../store/thunks/comments/isHasComment';
 import { setActive } from '../../store/thunks/comments/setActive';
 import { incrementViewsCount } from '../../store/thunks/tel/incrementViewsCount';
-
 import { useAppDispatch, useAppSelector } from '../../store';
+
 import Title from './components/Title';
 import Description from './components/Description';
 import InfoTable from './components/InfoTable';
 import OperatorAndRegion from './components/OperatorAndRegion';
 import Variations from './components/Variations';
+import Activity from './components/Activity';
+import CommentAddForm from '../../components/CommentAddForm';
+import CommentsList from '../../components/CommentsList';
 
 const TelNumber: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -52,14 +52,18 @@ const TelNumber: React.FC = () => {
 
   React.useEffect(() => {
     const telNumberEffect = async () => {
-      const isValidValue: boolean = await dispatch(
-        isValid({ telNumber })
+      // const isValidValue: boolean = await dispatch(
+      //   isValid({ telNumber })
+      // ).unwrap();
+
+      const { isValid, minifiedTelNumber } = await dispatch(
+        minifyTelNumber({ telNumber })
       ).unwrap();
 
-      dispatch(searchTel({ telNumber }));
-      dispatch(searchAdditionalInfo({ telNumber }));
-      setIsValidNumber(isValidValue);
+      dispatch(searchTel({ telNumber: minifiedTelNumber }));
+      dispatch(searchAdditionalInfo({ telNumber: minifiedTelNumber }));
 
+      setIsValidNumber(isValid);
       setDataIsLoading(false);
     };
 

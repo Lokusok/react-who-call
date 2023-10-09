@@ -7,8 +7,13 @@ interface StandartifyFormatsProps {
   telNumber: string;
 }
 
+interface StandartifyFormatsReturnedValue {
+  internationalFormat: string;
+  nationalFormat: string;
+}
+
 export const standartifyFormats = createAsyncThunk<
-  void,
+  StandartifyFormatsReturnedValue,
   StandartifyFormatsProps
 >('tel/standartifyFormats', async ({ telNumber }, { dispatch }) => {
   const response = await telAPI.post('/standartify', {
@@ -18,4 +23,6 @@ export const standartifyFormats = createAsyncThunk<
   if (response.status === 200) {
     dispatch(setFormats(response.data));
   }
+
+  return response.data;
 });

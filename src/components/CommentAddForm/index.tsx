@@ -53,10 +53,6 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
     },
   });
 
-  React.useEffect(() => {
-    console.log(errors, '<----');
-  });
-
   const onSubmit: SubmitHandler<ICommentAddFormInputs> = async (data) => {
     const token = window.localStorage.getItem('token');
 
