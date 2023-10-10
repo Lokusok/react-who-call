@@ -14,14 +14,18 @@ import {
   Line,
 } from 'recharts';
 
-import { chartData } from '../../../../../api/mock';
+import { TelActivity } from '../../../../../types';
 
-const Chart: React.FC = () => {
+interface ChartProps {
+  activity: TelActivity;
+}
+
+const Chart: React.FC<ChartProps> = ({ activity }) => {
   return (
     <Box sx={{ maxWidth: '650px' }}>
       <ResponsiveContainer width="100%" height={250}>
         <LineChart
-          data={chartData}
+          data={activity}
           margin={{ top: 0, right: 0, left: -30, bottom: 0 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
@@ -31,7 +35,7 @@ const Chart: React.FC = () => {
           <Legend />
           <Line
             type="monotone"
-            dataKey="reviewsCount"
+            dataKey="count"
             name={'Количество отзывов'}
             stroke={blue[800]}
           />

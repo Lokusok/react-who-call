@@ -13,7 +13,7 @@ interface SearchTelAndSetProps {
 export const searchTel = createAsyncThunk<ITel, SearchTelAndSetProps>(
   'tel/searchTelAndSet',
   async ({ telNumber, telId }, { dispatch }) => {
-    const response = await telAPI.post('/search', { search: telNumber, telId });
+    const response = await telAPI.post('/search', { telNumber, telId });
 
     if (response.data) {
       const resTelNumber = response.data.telNumber;

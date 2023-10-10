@@ -6,12 +6,12 @@ import { Typography, Box, Alert, Skeleton } from '@mui/material';
 
 import { resetActiveInfoAll } from '../../store/slices/telSlice';
 import { searchTel } from '../../store/thunks/tel/searchTel';
-import { isValid } from '../../store/thunks/tel/isValid';
 import { minifyTelNumber } from '../../store/thunks/tel/minifyTelNumber';
 import { searchAdditionalInfo } from '../../store/thunks/tel/searchAdditionalInfo';
 import { isHasComment } from '../../store/thunks/comments/isHasComment';
 import { setActive } from '../../store/thunks/comments/setActive';
 import { incrementViewsCount } from '../../store/thunks/tel/incrementViewsCount';
+import { setActivity } from '../../store/thunks/tel/setAcitivity';
 import { useAppDispatch, useAppSelector } from '../../store';
 
 import Title from './components/Title';
@@ -23,6 +23,8 @@ import Activity from './components/Activity';
 import CommentAddForm from '../../components/CommentAddForm';
 import CommentsList from '../../components/CommentsList';
 
+import { TelActivity } from '../../types';
+
 const TelNumber: React.FC = () => {
   const dispatch = useAppDispatch();
 
@@ -32,6 +34,7 @@ const TelNumber: React.FC = () => {
   const activeComments = useAppSelector(
     (state) => state.comments.activeComments
   );
+  const activity = useAppSelector((state) => state.tel.activity);
 
   const params = useParams();
 
@@ -52,19 +55,19 @@ const TelNumber: React.FC = () => {
 
   React.useEffect(() => {
     const telNumberEffect = async () => {
-      // const isValidValue: boolean = await dispatch(
-      //   isValid({ telNumber })
-      // ).unwrap();
-
-      const { isValid, minifiedTelNumber } = await dispatch(
+      const responseMinify = await dispatch(
         minifyTelNumber({ telNumber })
       ).unwrap();
 
-      dispatch(searchTel({ telNumber: minifiedTelNumber }));
-      dispatch(searchAdditionalInfo({ telNumber: minifiedTelNumber }));
+      if (responseMinify) {
+        const { isValid, minifiedTelNumber } = responseMinify;
 
-      setIsValidNumber(isValid);
-      setDataIsLoading(false);
+        dispatch(searchTel({ telNumber: minifiedTelNumber }));
+        dispatch(searchAdditionalInfo({ telNumber: minifiedTelNumber }));
+
+        setIsValidNumber(isValid);
+        setDataIsLoading(false);
+      }
     };
 
     if (
@@ -105,6 +108,7 @@ const TelNumber: React.FC = () => {
     if (activeTel) {
       dispatch(setActive({ telId: activeTel.id }));
       dispatch(incrementViewsCount({ telId: activeTel.id }));
+      dispatch(setActivity({ telId: activeTel.id }));
     }
   }, [activeTel]);
 
@@ -187,7 +191,10 @@ const TelNumber: React.FC = () => {
       />
 
       <Box sx={{ marginBottom: '1rem' }}>
-        <Activity title={`Активность номера +7${telNumber}`} />
+        <Activity
+          title={`Активность номера +7${telNumber}`}
+          activity={activity as TelActivity}
+        />
       </Box>
 
       <Box sx={{ marginBottom: '1rem' }}>

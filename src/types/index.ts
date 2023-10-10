@@ -65,3 +65,5 @@ export enum CallTypesEnum {
   'Колл-центр' = 'Колл-центр',
   Неадекваты = 'Неадекваты ',
 }
+
+export type TelActivity = Array<{ name: string; value: number }>;

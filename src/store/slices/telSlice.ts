@@ -1,9 +1,10 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { ITel, IPreviewOfTel } from '../../types';
+import { ITel, IPreviewOfTel, TelActivity } from '../../types';
 
 import { searchTel } from '../thunks/tel/searchTel';
 import { incrementViewsCount } from '../thunks/tel/incrementViewsCount';
+import { setActivity } from '../thunks/tel/setAcitivity';
 
 interface ITelFormats {
   internationalFormat: string | null;
@@ -17,8 +18,10 @@ interface IAdditionalInfo {
 
 interface ITelState {
   activeTel: ITel | null;
+  activity: TelActivity | null;
   formats: ITelFormats;
   additionalInfo: IAdditionalInfo;
+
   lastVerified: IPreviewOfTel[] | [] | null;
   mostViewed: IPreviewOfTel[] | [] | null;
   mostCommented: IPreviewOfTel[] | [] | null;
@@ -26,6 +29,7 @@ interface ITelState {
 
 const initialState: ITelState = {
   activeTel: null,
+  activity: null,
   formats: {
     internationalFormat: null,
     nationalFormat: null,
@@ -81,10 +85,17 @@ const telSlice = createSlice({
 
     builder.addCase(
       incrementViewsCount.fulfilled,
-      (state, action: PayloadAction<ITel | void>) => {
+      (state, action: PayloadAction<ITel | false>) => {
         if (state.activeTel?.viewsCount && action.payload) {
           state.activeTel.viewsCount = action.payload.viewsCount;
         }
+      }
+    );
+
+    builder.addCase(
+      setActivity.fulfilled,
+      (state, action: PayloadAction<TelActivity>) => {
+        state.activity = action.payload;
       }
     );
   },

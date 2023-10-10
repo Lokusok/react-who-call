@@ -9,7 +9,7 @@ interface IncrementViewsCountProps {
 }
 
 export const incrementViewsCount = createAsyncThunk<
-  ITel | void,
+  ITel | false,
   IncrementViewsCountProps
 >('tel/incrementViewsCount', async ({ telId }) => {
   const visitedStr = window.localStorage.getItem('visited');
@@ -17,7 +17,7 @@ export const incrementViewsCount = createAsyncThunk<
 
   // если номер уже был посещён - не отправляем запрос на сервер
   if (visitedNumbersIds[telId]) {
-    return;
+    return false;
   }
 
   try {
@@ -31,5 +31,6 @@ export const incrementViewsCount = createAsyncThunk<
     return response.data;
   } catch (err) {
     console.error(err);
+    return false;
   }
 });

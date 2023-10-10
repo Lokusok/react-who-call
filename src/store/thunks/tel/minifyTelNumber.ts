@@ -12,10 +12,14 @@ interface MinifyTelNumberReturnValue {
 }
 
 export const minifyTelNumber = createAsyncThunk<
-  MinifyTelNumberReturnValue,
+  MinifyTelNumberReturnValue | false,
   MinifyTelNumberProps
 >('tel/minifyTelNumber', async ({ telNumber }) => {
-  const response = await telAPI.post('/minify-tel-number', { telNumber });
-
-  return response.data;
+  try {
+    const response = await telAPI.post('/minify-tel-number', { telNumber });
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    return false;
+  }
 });

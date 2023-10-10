@@ -4,11 +4,14 @@ import { Box, Typography } from '@mui/material';
 
 import Chart from './Chart';
 
+import { TelActivity } from '../../../../types';
+
 interface ActivityProps {
   title: string;
+  activity: TelActivity;
 }
 
-const Activity: React.FC<ActivityProps> = ({ title }) => {
+const Activity: React.FC<ActivityProps> = ({ title, activity }) => {
   return (
     <Box>
       <Typography
@@ -20,7 +23,7 @@ const Activity: React.FC<ActivityProps> = ({ title }) => {
       </Typography>
 
       <Box>
-        <Chart />
+        <Chart activity={activity} />
       </Box>
     </Box>
   );
