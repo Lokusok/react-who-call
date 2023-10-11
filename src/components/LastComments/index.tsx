@@ -1,26 +1,52 @@
 import React from 'react';
 
-import { Typography, Box, Grid } from '@mui/material';
+import CommentsLine from './CommentsLine';
 
-import Comment from '../Comment';
+import { Typography, Box, Skeleton, Stack } from '@mui/material';
+
+import { setAll } from '../../store/thunks/comments/setAll';
+import { useAppDispatch, useAppSelector } from '../../store';
+
 import Pagination from '../Pagination';
-
-import { dataComments } from '../../api/mock';
+import { IComment } from '../../types';
 
 const LastComments: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const comments = useAppSelector((state) => state.comments.all);
+  const [page, setPage] = React.useState(1);
+  const pagesCount = comments.count && Math.ceil(comments.count / 5);
+
+  React.useEffect(() => {
+    console.log({ page });
+    dispatch(setAll({ page }));
+  }, [page]);
+
+  const onChange = (_: any, value: number) => {
+    setPage(value);
+  };
+
+  if (!comments.count && !comments.items) {
+    return (
+      <Box sx={{ paddingTop: 2 }}>
+        <Skeleton variant="rounded" width={250} height={30} />
+
+        <Stack direction="column" spacing={2} sx={{ marginTop: 2 }}>
+          <Skeleton variant="rounded" width="100%" height={100} />
+          <Skeleton variant="rounded" width="100%" height={100} />
+          <Skeleton variant="rounded" width="100%" height={100} />
+          <Skeleton variant="rounded" width="100%" height={100} />
+        </Stack>
+      </Box>
+    );
+  }
+
   return (
     <Box sx={{ paddingTop: 2 }}>
       <Typography fontSize={19} fontWeight={400} sx={{ marginBottom: '8px' }}>
         Последние комментарии:
       </Typography>
 
-      <Grid container direction="column" spacing={2.5}>
-        {dataComments.map((commData) => (
-          <Grid item key={commData.id}>
-            <Comment {...commData} />
-          </Grid>
-        ))}
-      </Grid>
+      <CommentsLine comments={comments.items as IComment[]} />
 
       <Box
         sx={{
@@ -30,7 +56,11 @@ const LastComments: React.FC = () => {
           marginBottom: '0.3rem',
         }}
       >
-        <Pagination />
+        <Pagination
+          onChange={onChange}
+          count={pagesCount as number}
+          defaultPage={page}
+        />
       </Box>
     </Box>
   );

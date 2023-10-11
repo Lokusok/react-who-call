@@ -38,7 +38,7 @@ const useHideStatusByDefault = ({
         break;
       }
     }
-  }, []);
+  }, [type]);
 };
 
 export default useHideStatusByDefault;

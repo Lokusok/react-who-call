@@ -10,6 +10,8 @@ import { IComment } from '../../types';
 import ViewsCount from '../ViewsCount';
 import CommentsCount from '../CommentsCount';
 
+import alphabetColors from '../../utils/alphabetColors';
+
 interface CommentProps extends IComment {
   viewsCount?: number;
   commentsCount?: number;
@@ -19,7 +21,7 @@ const Comment: React.FC<CommentProps> = ({
   username,
   date,
   time,
-  telNumber,
+  Tel,
   viewsCount,
   commentsCount,
   description,
@@ -50,14 +52,26 @@ const Comment: React.FC<CommentProps> = ({
                   sx={{
                     width: 25,
                     height: 25,
-                    bgcolor: deepOrange[500],
+                    bgcolor:
+                      alphabetColors[
+                        username[0].toLowerCase() || deepOrange[500]
+                      ],
                     fontSize: 18,
                   }}
                 >
                   {username[0].toUpperCase()}
                 </Avatar>
 
-                <Typography fontWeight={700}>{username}</Typography>
+                <Typography
+                  fontWeight={700}
+                  sx={{
+                    maxWidth: 300,
+                    textOverflow: 'ellipsis',
+                    overflow: 'hidden',
+                  }}
+                >
+                  {username}
+                </Typography>
 
                 <Box sx={{ marginLeft: '5px' }}>
                   <Stack direction="row" spacing={0.5}>
@@ -73,13 +87,13 @@ const Comment: React.FC<CommentProps> = ({
               <Stack direction="row" alignItems="center" spacing={1}>
                 <Link
                   component={RouterLink}
-                  to={`/tel/${telNumber}`}
+                  to={`/tel/${Tel?.telNumber}`}
                   color="primary"
                   fontSize={14}
                   fontWeight={900}
                   underline="hover"
                 >
-                  {telNumber}
+                  {Tel?.telNumber}
                 </Link>
 
                 {Boolean(viewsCount) && (

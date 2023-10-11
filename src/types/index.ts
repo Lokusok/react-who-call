@@ -3,12 +3,15 @@ export interface IComment {
   username: string;
   date: string;
   time: string;
-  telNumber?: string;
   description: string;
   type: string | null;
   UserId?: number;
   TelId?: number;
   telCommentsCount?: number;
+
+  Tel?: {
+    telNumber?: string;
+  };
 }
 
 export interface INewComment extends IComment {
@@ -67,3 +70,8 @@ export enum CallTypesEnum {
 }
 
 export type TelActivity = Array<{ name: string; value: number }>;
+
+export interface IAllComments {
+  count: number | null;
+  items: IComment[] | [] | null;
+}

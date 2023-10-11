@@ -18,13 +18,7 @@ import { setRegister } from '../../../store/thunks/statuses/setRegister';
 import { checkUnique } from '../../../store/thunks/user/checkUnique';
 import { userRegister } from '../../../store/thunks/user/userRegister';
 
-import useHideStatusByDefault from '../../../hooks/useHideStatusByDefault';
-
-import {
-  UniqueUserFields,
-  StatusesStates,
-  TypesOfStatuses,
-} from '../../../types';
+import { UniqueUserFields, StatusesStates } from '../../../types';
 
 interface RegisterFormInputs {
   email: string;
@@ -77,8 +71,6 @@ const RegisterForm: React.FC = () => {
       return res ? true : errorMessage;
     };
   };
-
-  useHideStatusByDefault({ dispatch, type: TypesOfStatuses.Register });
 
   return (
     <>

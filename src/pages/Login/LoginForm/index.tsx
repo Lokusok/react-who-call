@@ -54,8 +54,6 @@ const LoginForm: React.FC = () => {
     ).unwrap();
   };
 
-  useHideStatusByDefault({ dispatch, type: TypesOfStatuses.Login });
-
   return (
     <>
       <Form onSubmit={handleSubmit(loginUser)} method="POST" title={'Войти'}>

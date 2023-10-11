@@ -8,10 +8,12 @@ import { resetActiveInfoAll } from '../../store/slices/telSlice';
 import { searchTel } from '../../store/thunks/tel/searchTel';
 import { minifyTelNumber } from '../../store/thunks/tel/minifyTelNumber';
 import { searchAdditionalInfo } from '../../store/thunks/tel/searchAdditionalInfo';
-import { isHasComment } from '../../store/thunks/comments/isHasComment';
-import { setActive } from '../../store/thunks/comments/setActive';
 import { incrementViewsCount } from '../../store/thunks/tel/incrementViewsCount';
 import { setActivity } from '../../store/thunks/tel/setAcitivity';
+
+import { isHasComment } from '../../store/thunks/comments/isHasComment';
+import { setActive } from '../../store/thunks/comments/setActive';
+
 import { useAppDispatch, useAppSelector } from '../../store';
 
 import Title from './components/Title';

@@ -3,6 +3,9 @@ import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Menu, MenuItem, Link } from '@mui/material';
 
+import { useAppDispatch, useAppSelector } from '../../store';
+import { userLogout } from '../../store/thunks/user/userLogout';
+
 interface MobileMenuProps {
   visibleMenu: boolean;
   handleClose: () => void;
@@ -12,6 +15,14 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
   visibleMenu,
   handleClose,
 }) => {
+  const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector((state) => state.user.loggedIn);
+
+  const handleLogout = () => {
+    dispatch(userLogout());
+    handleClose();
+  };
+
   return (
     <Menu
       open={visibleMenu}
@@ -34,6 +45,17 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       <Link component={RouterLink} to="/codes" color="black">
         <MenuItem onClick={handleClose}>Список кодов</MenuItem>
       </Link>
+      <>
+        {isLoggedIn ? (
+          <Link color="black">
+            <MenuItem onClick={handleLogout}>Выйти</MenuItem>
+          </Link>
+        ) : (
+          <Link component={RouterLink} to="/login" color="black">
+            <MenuItem onClick={handleClose}>Войти</MenuItem>
+          </Link>
+        )}
+      </>
     </Menu>
   );
 };
