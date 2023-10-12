@@ -4,6 +4,7 @@ import { commentsAPI } from '../../../api';
 
 import { setActive } from './setActive';
 import { setNew } from './setNew';
+import { searchTel } from '../tel/searchTel';
 
 import { CallTypesEnum } from '../../../types';
 
@@ -22,5 +23,7 @@ export const addComment = createAsyncThunk<void, AddCommentProps>(
     await commentsAPI.post('/new', payload);
     await dispatch(setActive({ telId: payload.telId }));
     await dispatch(setNew({ limit: 10 }));
+
+    await dispatch(searchTel({ telId: payload.telId }));
   }
 );
