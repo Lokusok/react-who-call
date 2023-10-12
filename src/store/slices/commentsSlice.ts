@@ -36,7 +36,6 @@ const commentsSlice = createSlice({
     builder.addCase(
       setAll.fulfilled,
       (state, action: PayloadAction<IAllComments>) => {
-        console.log({ commentsBuilder: action.payload });
         state.all = action.payload;
       }
     );

@@ -17,7 +17,6 @@ const LastComments: React.FC = () => {
   const pagesCount = comments.count && Math.ceil(comments.count / 5);
 
   React.useEffect(() => {
-    console.log({ page });
     dispatch(setAll({ page }));
   }, [page]);
 

@@ -14,7 +14,6 @@ export const setAll = createAsyncThunk<IAllComments, SetAllProps>(
     const response = await commentsAPI.get('/get-all-comments', {
       params: { page },
     });
-    console.log({ allComments: response.data });
 
     return response.data;
   }

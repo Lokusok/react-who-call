@@ -5,6 +5,7 @@ import user from './slices/userSlice';
 import status from './slices/statusesSlice';
 import tel from './slices/telSlice';
 import comments from './slices/commentsSlice';
+import mail from './slices/mailSlice';
 
 const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ const store = configureStore({
     status,
     tel,
     comments,
+    mail,
   },
 });
 

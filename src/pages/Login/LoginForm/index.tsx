@@ -22,10 +22,6 @@ import Input from '../../components/styled/Input';
 import { useAppDispatch } from '../../../store';
 import { userLogin } from '../../../store/thunks/user/userLogin';
 
-import useHideStatusByDefault from '../../../hooks/useHideStatusByDefault';
-
-import { TypesOfStatuses } from '../../../types';
-
 const CustomCheckbox = styled(Checkbox)`
   padding: 0;
   padding-right: 7px;
