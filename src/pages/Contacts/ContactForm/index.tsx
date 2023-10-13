@@ -40,9 +40,23 @@ const ContactForm: React.FC = () => {
   const captchaRef = React.useRef<ReCAPTCHA>(null);
 
   const onSubmit: SubmitHandler<ContactFormInputs> = (data) => {
+    console.log({ captchaVal: captchaRef.current?.getValue() });
+    const recaptchaToken = captchaRef.current?.getValue();
+
+    if (!recaptchaToken) {
+      return;
+    }
+
     dispatch(
-      sendText({ name: data.username, email: data.email, text: data.question })
+      sendText({
+        name: data.username,
+        email: data.email,
+        text: data.question,
+        token: recaptchaToken,
+      })
     );
+
+    captchaRef.current?.reset();
     reset();
   };
 
@@ -131,7 +145,7 @@ const ContactForm: React.FC = () => {
               <Box>
                 <ReCAPTCHA
                   ref={captchaRef}
-                  sitekey={import.meta.env.VITE_SITE_KEY}
+                  sitekey={import.meta.env.VITE_RECAPTCHA_SITE_KEY}
                 />
               </Box>
 
