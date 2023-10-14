@@ -19,7 +19,6 @@ import { blue } from '@mui/material/colors';
 
 import { useAppDispatch, useAppSelector } from '../../store';
 import { addComment } from '../../store/thunks/comments/addComment';
-import { setActive } from '../../store/thunks/comments/setActive';
 
 import { CallTypesEnum } from '../../types';
 
