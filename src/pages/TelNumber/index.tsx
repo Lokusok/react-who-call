@@ -24,6 +24,7 @@ import Variations from './components/Variations';
 import Activity from './components/Activity';
 import CommentAddForm from '../../components/CommentAddForm';
 import CommentsList from '../../components/CommentsList';
+import ShareActions from './components/ShareActions';
 
 import { TelActivity } from '../../types';
 
@@ -232,6 +233,10 @@ const TelNumber: React.FC = () => {
           comments={activeComments}
           telNumber={telNumber as string}
         />
+      </Box>
+
+      <Box sx={{ marginTop: '1rem' }}>
+        <ShareActions telNumber={telNumber} />
       </Box>
     </Box>
   );
