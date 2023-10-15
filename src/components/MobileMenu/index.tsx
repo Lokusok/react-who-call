@@ -42,9 +42,6 @@ const MobileMenu: React.FC<MobileMenuProps> = ({
       <Link component={RouterLink} to="/main" color="black">
         <MenuItem onClick={handleClose}>Главная</MenuItem>
       </Link>
-      <Link component={RouterLink} to="/codes" color="black">
-        <MenuItem onClick={handleClose}>Список кодов</MenuItem>
-      </Link>
       <>
         {isLoggedIn ? (
           <Link color="black">

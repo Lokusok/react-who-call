@@ -6,7 +6,7 @@ import { Grid, Link, Box } from '@mui/material';
 import Logo from '../../Logo';
 import NavBar from '../NavBar';
 
-const HeaderItems = () => {
+const HeaderItems: React.FC = () => {
   return (
     <Grid container spacing={4} alignItems="center">
       <Grid item>

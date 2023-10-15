@@ -2,16 +2,16 @@ import React from 'react';
 
 import { Typography, Alert } from '@mui/material';
 
-interface ForgetSendSuccessProps {
+interface ForgetSendErrorProps {
   children: React.ReactNode;
 }
 
-const ForgetSendSuccess: React.FC<ForgetSendSuccessProps> = ({ children }) => {
+const ForgetSendError: React.FC<ForgetSendErrorProps> = ({ children }) => {
   return (
-    <Alert severity="success">
+    <Alert severity="error">
       <Typography>{children}</Typography>
     </Alert>
   );
 };
 
-export default ForgetSendSuccess;
+export default ForgetSendError;

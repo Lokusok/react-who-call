@@ -38,7 +38,7 @@ const RegisterForm: React.FC = () => {
     formState: { errors },
     getValues,
   } = useForm<RegisterFormInputs>({
-    reValidateMode: 'onBlur',
+    reValidateMode: 'onSubmit',
   });
 
   const setErrorStatus = () => {
@@ -128,12 +128,15 @@ const RegisterForm: React.FC = () => {
         <Stack direction="column" spacing={1}>
           <FormLabel htmlFor="password">Пароль:</FormLabel>
           <Input
-            {...register('password')}
+            {...register('password', {
+              minLength: { value: 5, message: 'Минимум 5 символов' },
+            })}
             name="password"
             id="password"
             type="password"
             required
           />
+          <Error>{errors?.password?.message}</Error>
         </Stack>
 
         <Stack direction="column" spacing={1}>

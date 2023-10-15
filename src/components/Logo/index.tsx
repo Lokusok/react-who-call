@@ -1,7 +1,9 @@
-import { Box, Typography } from '@mui/material';
+import React from 'react';
+
+import { Box } from '@mui/material';
 import CallIcon from '@mui/icons-material/Call';
 
-const Logo = () => {
+const Logo: React.FC = () => {
   return (
     <Box
       sx={{
@@ -26,7 +28,7 @@ const Logo = () => {
       >
         <CallIcon fontSize="small" color="primary" />
       </Box>
-      Звонили
+      Позвонили
     </Box>
   );
 };

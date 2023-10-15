@@ -20,10 +20,6 @@ const NavBar = () => {
       <Grid item>
         <NavLink to="/main">Главная</NavLink>
       </Grid>
-
-      <Grid item>
-        <NavLink to="/cods">Коды номеров</NavLink>
-      </Grid>
     </Grid>
   );
 };

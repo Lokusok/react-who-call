@@ -32,7 +32,7 @@ interface ShareActionsProps {
 const ShareActions: React.FC<ShareActionsProps> = ({ telNumber }) => {
   return (
     <Wrapper>
-      <Title>Поделиться информацией о номере</Title>
+      <Title>Поделиться информацией о номере:</Title>
 
       <Stack direction="row" spacing={2}>
         <VKShareButton

@@ -214,7 +214,7 @@ const TelNumber: React.FC = () => {
       <Box sx={{ marginBottom: '2rem' }}>
         {isAlreadyCommented ? (
           <Alert severity={'info'} sx={{ width: '100%' }}>
-            Вы уже прокомментировали данный номер.
+            Вы уже комментировали один из номеров.
           </Alert>
         ) : (
           <CommentAddForm telId={activeTel.id} />

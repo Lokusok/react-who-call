@@ -40,7 +40,6 @@ const ContactForm: React.FC = () => {
   const captchaRef = React.useRef<ReCAPTCHA>(null);
 
   const onSubmit: SubmitHandler<ContactFormInputs> = (data) => {
-    console.log({ captchaVal: captchaRef.current?.getValue() });
     const recaptchaToken = captchaRef.current?.getValue();
 
     if (!recaptchaToken) {
@@ -127,15 +126,16 @@ const ContactForm: React.FC = () => {
                     },
 
                     maxLength: {
-                      value: 125,
-                      message: 'Максимум 125 символов',
+                      value: 2048,
+                      message: 'Максимум 2048 символов',
                     },
                   })}
                   type="text"
                   required
                   variant="outlined"
                   multiline
-                  rows={6}
+                  minRows={6}
+                  maxRows={12}
                 />
                 {errors?.question?.message && (
                   <Error>{errors?.question?.message}</Error>

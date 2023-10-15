@@ -2,7 +2,7 @@ import React from 'react';
 
 import { GlobalStyles, Box, CssBaseline } from '@mui/material';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import useChangeHeight from './hooks/useChangeHeight';
 import useProcessToken from './hooks/useProcessToken';
@@ -17,13 +17,14 @@ import Contacts from './pages/Contacts';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import ForgetPassword from './pages/ForgetPassword';
+import ForgetForm from './pages/ForgetPassword/ForgetForm';
+import ResetPassword from './pages/ForgetPassword/ResetPassword';
 
 import RequireNotAuth from './hoc/RequireNotAuth';
 
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Search from './components/Search';
-
 import Enter from './pages/components/Enter';
 import StatusLayer from './components/StatusLayer';
 
@@ -61,6 +62,7 @@ const App: React.FC = () => {
               <Route path="tel/:telNumber" element={<TelNumber />} />
               <Route path="/rules" element={<Rules />} />
               <Route path="contacts" element={<Contacts />} />
+              <Route path="*" element={<Navigate to="/" />} />
             </Route>
 
             <Route path="/" element={<Enter />}>
@@ -80,7 +82,10 @@ const App: React.FC = () => {
                   </RequireNotAuth>
                 }
               />
-              <Route path="/forget_password" element={<ForgetPassword />} />
+              <Route path="/forget_password" element={<ForgetPassword />}>
+                <Route index element={<ForgetForm />} />
+                <Route path="reset/:token" element={<ResetPassword />} />
+              </Route>
             </Route>
           </Routes>
         </Box>

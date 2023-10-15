@@ -30,6 +30,11 @@ const statusTexts: Record<string, Record<StatusesStates, string | null>> = {
     [StatusesStates.Error]: 'При выходе из аккаунта произошла ошибка',
     [StatusesStates.Default]: null,
   },
+  resetPassword: {
+    [StatusesStates.Success]: 'Пароль был успешно изменён',
+    [StatusesStates.Error]: 'При изменении пароля произошла ошибка',
+    [StatusesStates.Default]: null,
+  },
 };
 
 interface IStatusObj {
@@ -67,13 +72,19 @@ const StatusLayer: React.FC = () => {
   const { status: statusLogout, showStatus: showStatusLogout } = useAppSelector(
     (state) => state.status.logout
   );
+  const { status: statusResetPassword, showStatus: showStatusResetPassword } =
+    useAppSelector((state) => state.status.resetPassword);
 
   const showStatus: boolean =
-    showStatusRegister || showStatusLogin || showStatusLogout;
+    showStatusRegister ||
+    showStatusLogin ||
+    showStatusLogout ||
+    showStatusResetPassword;
   const statusValue = getStatusValue(
     { type: 'register', status: statusRegister },
     { type: 'login', status: statusLogin },
-    { type: 'logout', status: statusLogout }
+    { type: 'logout', status: statusLogout },
+    { type: 'resetPassword', status: statusResetPassword }
   );
 
   const severity = severities[

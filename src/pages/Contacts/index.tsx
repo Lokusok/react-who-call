@@ -38,7 +38,7 @@ const Contacts: React.FC = () => {
           <Skeleton variant="rounded" height={420} />
         ) : isSended ? (
           <Alert severity="info">
-            <Typography>
+            <Typography fontSize={15}>
               Вы уже отослали форму обратной связи. Мы пришлём ответ в ближайшее
               время. Спасибо.
             </Typography>
