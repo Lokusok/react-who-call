@@ -5,6 +5,8 @@
 - JWT-токен
 - Material UI
 - StyledComponents
+- Регистрация, авторизация
+- Сброс пароля по почте
 - Custom Hooks
 - И многое другое...
 
