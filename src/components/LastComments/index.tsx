@@ -4,41 +4,22 @@ import CommentsLine from './CommentsLine';
 
 import { Typography, Box, Skeleton, Stack } from '@mui/material';
 
-import { setAll } from '../../store/thunks/comments/setAll';
-import { useAppDispatch, useAppSelector } from '../../store';
-
 import Pagination from '../Pagination';
-import { IComment } from '../../types';
+import { IComment, IAllComments } from '../../types';
 
-const LastComments: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const comments = useAppSelector((state) => state.comments.all);
-  const [page, setPage] = React.useState(1);
-  const pagesCount = comments.count && Math.ceil(comments.count / 5);
+interface LastCommentsProps {
+  comments: IAllComments;
+  onChange: (_: any, value: number) => void;
+  pagesCount: number;
+  page: number;
+}
 
-  React.useEffect(() => {
-    dispatch(setAll({ page }));
-  }, [page]);
-
-  const onChange = (_: any, value: number) => {
-    setPage(value);
-  };
-
-  if (!comments.count && !comments.items) {
-    return (
-      <Box sx={{ paddingTop: 2 }}>
-        <Skeleton variant="rounded" width={250} height={30} />
-
-        <Stack direction="column" spacing={2} sx={{ marginTop: 2 }}>
-          <Skeleton variant="rounded" width="100%" height={100} />
-          <Skeleton variant="rounded" width="100%" height={100} />
-          <Skeleton variant="rounded" width="100%" height={100} />
-          <Skeleton variant="rounded" width="100%" height={100} />
-        </Stack>
-      </Box>
-    );
-  }
-
+const LastComments: React.FC<LastCommentsProps> = ({
+  comments,
+  onChange,
+  pagesCount,
+  page,
+}) => {
   return (
     <Box sx={{ paddingTop: 2 }}>
       <Typography fontSize={19} fontWeight={400} sx={{ marginBottom: '8px' }}>
@@ -55,11 +36,13 @@ const LastComments: React.FC = () => {
           marginBottom: '0.3rem',
         }}
       >
-        <Pagination
-          onChange={onChange}
-          count={pagesCount as number}
-          defaultPage={page}
-        />
+        {pagesCount > 1 && (
+          <Pagination
+            onChange={onChange}
+            count={pagesCount as number}
+            defaultPage={page}
+          />
+        )}
       </Box>
     </Box>
   );

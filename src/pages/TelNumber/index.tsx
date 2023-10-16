@@ -43,6 +43,8 @@ const TelNumber: React.FC = () => {
 
   const telNumber = params.telNumber as string;
   const [isValidNumber, setIsValidNumber] = React.useState(true);
+  const [isAlreadyCommentedThisTel, setIsAlreadyCommentedThisTel] =
+    React.useState(false);
   const [isAlreadyCommented, setIsAlreadyCommented] = React.useState(false);
   const [dataIsLoading, setDataIsLoading] = React.useState(true);
 
@@ -91,7 +93,7 @@ const TelNumber: React.FC = () => {
           isHasComment({ userId: user.id, telId: activeTel.id })
         ).unwrap();
 
-        setIsAlreadyCommented(isHasCommented);
+        setIsAlreadyCommentedThisTel(isHasCommented);
       }
 
       // для неавторизованного
@@ -212,7 +214,11 @@ const TelNumber: React.FC = () => {
       </Box>
 
       <Box sx={{ marginBottom: '2rem' }}>
-        {isAlreadyCommented ? (
+        {isAlreadyCommentedThisTel ? (
+          <Alert severity={'info'} sx={{ width: '100%' }}>
+            Вы уже комментировали данный номер.
+          </Alert>
+        ) : isAlreadyCommented ? (
           <Alert severity={'info'} sx={{ width: '100%' }}>
             Вы уже комментировали один из номеров.
           </Alert>

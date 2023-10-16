@@ -20,7 +20,7 @@ const LogoutButton: React.FC = () => {
       sx={{ padding: 0 }}
       title={'Выйти из профиля'}
     >
-      <LogoutIcon sx={{ color: '#fff' }} />
+      <LogoutIcon sx={{ color: '#fff', '&:active': { opacity: 0.5 } }} />
     </Button>
   );
 };

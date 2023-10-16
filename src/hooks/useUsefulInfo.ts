@@ -9,7 +9,9 @@ import { setNew } from '../store/thunks/comments/setNew';
 import { setContactsIsSended } from '../store/thunks/mail/setContactsIsSended';
 import { setResetPasswordIsSended } from '../store/thunks/mail/setResetPasswordIsSended';
 
-const useUsefulInfo = (dispatch: AppDispatch) => {
+import { ITel } from '../types';
+
+const useUsefulInfo = (dispatch: AppDispatch, activeTel: ITel | null) => {
   React.useEffect(() => {
     dispatch(setVerified({ limit: 10 }));
     dispatch(setViewed({ limit: 10 }));
@@ -18,7 +20,7 @@ const useUsefulInfo = (dispatch: AppDispatch) => {
 
     dispatch(setContactsIsSended());
     dispatch(setResetPasswordIsSended());
-  }, []);
+  }, [activeTel]);
 };
 
 export default useUsefulInfo;

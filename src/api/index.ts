@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 export const userAPI = axios.create({
-  baseURL: `${import.meta.env.VITE_SERVER_HOST}/user`,
+  baseURL: `${import.meta.env.VITE_API_HOST}/user`,
 });
 
 export const telAPI = axios.create({
-  baseURL: `${import.meta.env.VITE_SERVER_HOST}/tel`,
+  baseURL: `${import.meta.env.VITE_API_HOST}/tel`,
 });
 
 export const telOuterAPI = axios.create({
@@ -13,9 +13,9 @@ export const telOuterAPI = axios.create({
 });
 
 export const commentsAPI = axios.create({
-  baseURL: `${import.meta.env.VITE_SERVER_HOST}/comments`,
+  baseURL: `${import.meta.env.VITE_API_HOST}/comments`,
 });
 
 export const mailAPI = axios.create({
-  baseURL: `${import.meta.env.VITE_SERVER_HOST}/mail`,
+  baseURL: `${import.meta.env.VITE_API_HOST}/mail`,
 });

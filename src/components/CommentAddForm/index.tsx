@@ -17,6 +17,8 @@ import {
 } from '@mui/material';
 import { blue } from '@mui/material/colors';
 
+import Error from '../../pages/components/Form/Error';
+
 import { useAppDispatch, useAppSelector } from '../../store';
 import { addComment } from '../../store/thunks/comments/addComment';
 
@@ -90,11 +92,8 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
             rowSpacing={3}
           >
             <Grid item xs={12}>
-              <Stack direction="column">
-                <FormLabel
-                  htmlFor="comment"
-                  sx={{ marginBottom: '0.5rem', fontSize: '15px' }}
-                >
+              <Stack direction="column" spacing={1}>
+                <FormLabel htmlFor="comment" sx={{ fontSize: '15px' }}>
                   Комментарий:
                 </FormLabel>
 
@@ -110,9 +109,12 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
                       fontSize: '15px',
                     },
                   }}
-                  {...register('description')}
+                  {...register('description', {
+                    minLength: { value: 15, message: 'Минимум 15 символов' },
+                  })}
                   required
                 />
+                <Error>{errors?.description?.message}</Error>
               </Stack>
             </Grid>
 

@@ -28,7 +28,7 @@ import Search from './components/Search';
 import Enter from './pages/components/Enter';
 import StatusLayer from './components/StatusLayer';
 
-import { useAppDispatch } from './store';
+import { useAppDispatch, useAppSelector } from './store';
 
 const globStyles = {
   body: { minHeight: '100vh' },
@@ -37,12 +37,13 @@ const globStyles = {
 };
 
 const App: React.FC = () => {
+  const activeTel = useAppSelector((state) => state.tel.activeTel);
   const headerRef = React.useRef(null);
   const [height] = useChangeHeight(headerRef);
 
   const dispatch = useAppDispatch();
   useProcessToken(dispatch);
-  useUsefulInfo(dispatch);
+  useUsefulInfo(dispatch, activeTel);
 
   return (
     <>
