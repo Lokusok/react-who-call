@@ -128,10 +128,6 @@ const TelNumber: React.FC = () => {
     );
   }
 
-  React.useEffect(() => {
-    console.log(additionalInfo.operator);
-  });
-
   if (
     !activeTel ||
     !additionalInfo.operator ||
