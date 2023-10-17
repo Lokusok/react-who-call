@@ -15,7 +15,6 @@ import {
   Rating,
   Button,
 } from '@mui/material';
-import { green } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
 
 import Error from '../../pages/components/Form/Error';
@@ -98,7 +97,7 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
       </Box>
 
       <Box sx={{ padding: '0.5rem 1rem', paddingBottom: '1.5rem' }}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form method="POST" onSubmit={handleSubmit(onSubmit)}>
           <Grid
             container
             columnSpacing={{ xs: 0, sm: 2, md: 6, lg: 12 }}
@@ -183,7 +182,9 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
                 </FormLabel>
 
                 <FormControl fullWidth>
-                  <InputLabel id="category-call-label">Тип звонка</InputLabel>
+                  <InputLabel id="category-call-label" sx={{ top: '-4px' }}>
+                    Тип звонка
+                  </InputLabel>
                   <Select
                     native={true}
                     labelId="category-call-label"

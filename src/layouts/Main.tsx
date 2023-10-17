@@ -21,7 +21,7 @@ const Main: React.FC = () => {
       <Grid
         container
         columnSpacing={5}
-        rowSpacing={0}
+        rowSpacing={3}
         sx={{
           paddingTop: '20px',
           justifyContent: { xs: 'center', md: 'stretch' },
@@ -33,6 +33,8 @@ const Main: React.FC = () => {
 
         <Grid
           item
+          xs={12}
+          sm={6}
           md={4}
           lg={telNumber ? 3 : 4}
           sx={{ marginBottom: { xs: '2rem', md: 0 } }}

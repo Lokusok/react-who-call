@@ -2,7 +2,7 @@ import React from 'react';
 
 import CommentsLine from './CommentsLine';
 
-import { Typography, Box, Skeleton, Stack } from '@mui/material';
+import { Typography, Box } from '@mui/material';
 
 import Pagination from '../Pagination';
 import { IComment, IAllComments } from '../../types';
@@ -28,22 +28,22 @@ const LastComments: React.FC<LastCommentsProps> = ({
 
       <CommentsLine comments={comments.items as IComment[]} />
 
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: '2rem',
-          marginBottom: '0.3rem',
-        }}
-      >
-        {pagesCount > 1 && (
+      {pagesCount > 1 && (
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '2rem',
+            marginBottom: '0.3rem',
+          }}
+        >
           <Pagination
             onChange={onChange}
             count={pagesCount as number}
             defaultPage={page}
           />
-        )}
-      </Box>
+        </Box>
+      )}
     </Box>
   );
 };

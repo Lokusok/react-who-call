@@ -17,11 +17,9 @@ const RatingsColumn: React.FC<RatingsColumnProps> = ({
   mostViewedTels,
   mostCommented,
 }) => {
-  console.log({ lastVerifiedTels, mostViewedTels, mostCommented });
-
   if (
     [lastVerifiedTels, mostViewedTels, mostCommented].every(
-      (obj) => obj === null || obj.length === 0
+      (obj) => obj && obj.length === 0
     )
   ) {
     return (

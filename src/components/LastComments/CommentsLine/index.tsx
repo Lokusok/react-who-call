@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { Box, Grid } from '@mui/material';
+import { Grid } from '@mui/material';
 
 import Comment from '../../Comment';
-import Pagination from '../../Pagination';
 
 import { IComment } from '../../../types';
 

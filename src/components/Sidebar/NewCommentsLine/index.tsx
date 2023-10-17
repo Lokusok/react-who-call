@@ -15,7 +15,7 @@ const NewCommentsLine: React.FC<NewCommentsLineProps> = ({ newComments }) => {
     return (
       <>
         <Skeleton
-          variant="rectangular"
+          variant="rounded"
           width={150}
           height={20}
           sx={{ marginBottom: '1rem' }}
@@ -23,12 +23,7 @@ const NewCommentsLine: React.FC<NewCommentsLineProps> = ({ newComments }) => {
 
         <Stack direction="column" spacing={2}>
           {new Array(10).fill(null).map((_, index) => (
-            <Skeleton
-              key={index}
-              variant="rectangular"
-              width={300}
-              height={50}
-            />
+            <Skeleton key={index} variant="rounded" width={300} height={50} />
           ))}
         </Stack>
       </>
