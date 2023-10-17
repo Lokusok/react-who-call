@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Box } from '@mui/material';
 import { blue } from '@mui/material/colors';
+import { useTheme } from '@mui/material/styles';
 
 import {
   ResponsiveContainer,
@@ -21,6 +22,8 @@ interface ChartProps {
 }
 
 const Chart: React.FC<ChartProps> = ({ activity }) => {
+  const theme = useTheme();
+
   return (
     <Box sx={{ maxWidth: '650px' }}>
       <ResponsiveContainer width="100%" height={250}>
@@ -37,7 +40,7 @@ const Chart: React.FC<ChartProps> = ({ activity }) => {
             type="monotone"
             dataKey="count"
             name={'Количество отзывов'}
-            stroke={blue[800]}
+            stroke={theme.palette.primary.main}
           />
         </LineChart>
       </ResponsiveContainer>

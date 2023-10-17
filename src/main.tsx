@@ -1,6 +1,9 @@
 import ReactDOM from 'react-dom/client';
 
 import { Provider } from 'react-redux';
+
+import { green } from '@mui/material/colors';
+
 import store from './store/index.ts';
 
 import App from './App.tsx';
@@ -13,6 +16,11 @@ import {
 
 const theme = responsiveFontSizes(
   createTheme({
+    palette: {
+      primary: {
+        main: green[900],
+      },
+    },
     components: {
       MuiLink: {
         defaultProps: {

@@ -15,7 +15,8 @@ import {
   Rating,
   Button,
 } from '@mui/material';
-import { blue } from '@mui/material/colors';
+import { green } from '@mui/material/colors';
+import { useTheme } from '@mui/material/styles';
 
 import Error from '../../pages/components/Form/Error';
 
@@ -38,6 +39,8 @@ interface CommentAddFormProps {
 const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((store) => store.user);
+
+  const theme = useTheme();
 
   const {
     register,
@@ -77,8 +80,18 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
   };
 
   return (
-    <Box sx={{ border: `1px solid ${blue[700]}`, borderRadius: '5px' }}>
-      <Box sx={{ padding: '0.5rem 1rem', backgroundColor: blue[700] }}>
+    <Box
+      sx={{
+        border: `1px solid ${theme.palette.primary.main}`,
+        borderRadius: '5px',
+      }}
+    >
+      <Box
+        sx={{
+          padding: '0.5rem 1rem',
+          backgroundColor: theme.palette.primary.main,
+        }}
+      >
         <Typography color="white" fontSize={15} fontWeight={700}>
           Добавить отзыв
         </Typography>
