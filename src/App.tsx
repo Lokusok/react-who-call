@@ -31,7 +31,7 @@ import StatusLayer from './components/StatusLayer';
 import { useAppDispatch, useAppSelector } from './store';
 
 const globStyles = {
-  body: { minHeight: '100vh' },
+  body: { minHeight: '100vh', overflowX: 'hidden' },
   '#root': { minHeight: '100vh', display: 'flex', flexDirection: 'column' },
   '.MuiPaper-root': { top: '0 !important' },
 };

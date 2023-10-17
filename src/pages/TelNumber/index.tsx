@@ -89,6 +89,8 @@ const TelNumber: React.FC = () => {
 
       // для авторизованного пользователя - проверяем комментарии на сервере
       if (user.loggedIn && user.id && activeTel) {
+        setIsAlreadyCommented(false);
+
         isHasCommented = await dispatch(
           isHasComment({ userId: user.id, telId: activeTel.id })
         ).unwrap();
@@ -98,6 +100,8 @@ const TelNumber: React.FC = () => {
 
       // для неавторизованного
       if (!user.loggedIn) {
+        setIsAlreadyCommentedThisTel(false);
+
         const isCommentedStr = window.localStorage.getItem('commented');
 
         if (isCommentedStr && JSON.parse(isCommentedStr)) {
@@ -107,7 +111,7 @@ const TelNumber: React.FC = () => {
     };
 
     telNumberEffect();
-  }, [activeTel, activeComments]);
+  }, [user, activeTel, activeComments]);
 
   React.useEffect(() => {
     if (activeTel) {

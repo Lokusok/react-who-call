@@ -23,6 +23,7 @@ import { useAppDispatch, useAppSelector } from '../../store';
 import { addComment } from '../../store/thunks/comments/addComment';
 
 import { CallTypesEnum } from '../../types';
+import { isExist } from '../../store/thunks/user/isExist';
 
 interface ICommentAddFormInputs {
   description: string;
@@ -157,6 +158,23 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
                         minLength: {
                           value: 2,
                           message: 'Минимум 2 символа',
+                        },
+
+                        validate: async (value) => {
+                          // у залогиненного пользователя ничего не проверяем
+                          if (user.loggedIn) {
+                            return true;
+                          }
+
+                          const response = await dispatch(
+                            isExist({ username: value })
+                          ).unwrap();
+
+                          if (!response) {
+                            return 'Пользователь уже зарегистрирован';
+                          }
+
+                          return response;
                         },
                       })}
                       required
