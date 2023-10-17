@@ -124,6 +124,7 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
                   }}
                   {...register('description', {
                     minLength: { value: 15, message: 'Минимум 15 символов' },
+                    maxLength: { value: 250, message: 'Максимум 250 символов' },
                   })}
                   required
                 />
@@ -189,7 +190,7 @@ const CommentAddForm: React.FC<CommentAddFormProps> = ({ telId }) => {
                     id="category-call-select"
                     label="Тип звонка"
                     sx={{
-                      '& .MuiSelect-select': { padding: '0.75rem' },
+                      '& select': { padding: '0.75rem' },
                     }}
                     {...register('type', {
                       required: true,

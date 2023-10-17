@@ -128,7 +128,16 @@ const TelNumber: React.FC = () => {
     );
   }
 
-  if (!activeTel || !additionalInfo.operator || !additionalInfo.region) {
+  React.useEffect(() => {
+    console.log(additionalInfo.operator);
+  });
+
+  if (
+    !activeTel ||
+    !additionalInfo.operator ||
+    !additionalInfo.region ||
+    !internationalFormat
+  ) {
     return (
       <>
         <Skeleton>
@@ -163,9 +172,9 @@ const TelNumber: React.FC = () => {
           />{' '}
         </Skeleton>
 
-        <Skeleton variant="rectangular" width={200} height={30} />
+        <Skeleton variant="rounded" width={200} height={30} />
         <Skeleton
-          variant="rectangular"
+          variant="rounded"
           width="80%"
           height={300}
           sx={{ marginTop: '1rem' }}
@@ -191,8 +200,8 @@ const TelNumber: React.FC = () => {
       <OperatorAndRegion
         telNumber={telNumber}
         internationalFormat={internationalFormat as string}
-        operator={additionalInfo.operator as string}
-        region={additionalInfo.region as string}
+        operator={additionalInfo.operator}
+        region={additionalInfo.region}
       />
 
       <Box sx={{ marginBottom: '1rem' }}>

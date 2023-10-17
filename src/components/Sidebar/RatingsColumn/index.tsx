@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Grid } from '@mui/material';
+import { Grid, Alert, Typography } from '@mui/material';
 
 import RatingItems from '../../RatingItems';
 
@@ -17,6 +17,20 @@ const RatingsColumn: React.FC<RatingsColumnProps> = ({
   mostViewedTels,
   mostCommented,
 }) => {
+  console.log({ lastVerifiedTels, mostViewedTels, mostCommented });
+
+  if (
+    [lastVerifiedTels, mostViewedTels, mostCommented].every(
+      (obj) => obj === null || obj.length === 0
+    )
+  ) {
+    return (
+      <Alert severity="info">
+        <Typography fontSize={15}>Пока что тут пусто :)</Typography>
+      </Alert>
+    );
+  }
+
   return (
     <Grid container direction="column" spacing={3}>
       <Grid item>
