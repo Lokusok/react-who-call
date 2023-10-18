@@ -14,7 +14,7 @@ interface ChangePasswordProps {
 export const changePassword = createAsyncThunk<void, ChangePasswordProps>(
   'user/changePassword',
   async ({ newPassword, token }, { dispatch }) => {
-    const response = await userAPI.post('/change-password', {
+    await userAPI.post('/change-password', {
       newPassword,
       token,
     });

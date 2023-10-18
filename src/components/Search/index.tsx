@@ -16,7 +16,6 @@ import { grey } from '@mui/material/colors';
 
 import { useAppDispatch } from '../../store';
 import { resetActiveInfoAll } from '../../store/slices/telSlice';
-import { minifyTelNumber } from '../../store/thunks/tel/minifyTelNumber';
 
 interface SearchInputs {
   telNumber: string;

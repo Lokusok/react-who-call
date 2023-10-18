@@ -132,12 +132,7 @@ const TelNumber: React.FC = () => {
     );
   }
 
-  if (
-    !activeTel ||
-    !additionalInfo.operator ||
-    !additionalInfo.region ||
-    !internationalFormat
-  ) {
+  if (!activeTel || !internationalFormat) {
     return (
       <>
         <Skeleton>
@@ -159,8 +154,8 @@ const TelNumber: React.FC = () => {
           <OperatorAndRegion
             telNumber={telNumber}
             internationalFormat={internationalFormat as string}
-            operator={additionalInfo.operator as string}
-            region={additionalInfo.region as string}
+            operator={additionalInfo.operator}
+            region={additionalInfo.region}
           />
         </Skeleton>
 

@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 
 import NavLink from '../NavLink';
 
-const NavBar = () => {
+const NavBar: React.FC = () => {
   return (
     <Grid
       container

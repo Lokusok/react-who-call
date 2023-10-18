@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { Link as RouterLink } from 'react-router-dom';
-
-import { Box, Typography, Link } from '@mui/material';
+import { Box } from '@mui/material';
 import { grey } from '@mui/material/colors';
 import { styled } from '@mui/material/styles';
 

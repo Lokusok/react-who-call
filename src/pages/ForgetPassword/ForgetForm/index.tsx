@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useForm, SubmitHandler } from 'react-hook-form';
 
-import { Box, Stack, FormLabel, Skeleton, Typography } from '@mui/material';
+import { Box, Stack, FormLabel, Skeleton } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
 import Form from '../../components/Form';

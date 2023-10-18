@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Box } from '@mui/material';
-import { blue } from '@mui/material/colors';
 import { useTheme } from '@mui/material/styles';
 
 import {

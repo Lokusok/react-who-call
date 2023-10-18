@@ -52,7 +52,7 @@ const mailSlice = createSlice({
       }
     );
 
-    builder.addCase(sendResetPassword.fulfilled, (state, action) => {
+    builder.addCase(sendResetPassword.fulfilled, (state) => {
       state.resetPassword.isSended = true;
     });
 
@@ -70,8 +70,10 @@ const mailSlice = createSlice({
       switch (errorType) {
         case 'ALREADY_SENT':
           state.resetPassword.isSended = true;
+          break;
         case 'USER_UNDEFINED':
           state.resetPassword.userUndefined = true;
+          break;
       }
     });
 

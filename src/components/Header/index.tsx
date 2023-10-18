@@ -8,7 +8,7 @@ import Burger from './Burger';
 import MobileMenu from '../MobileMenu';
 import ProfileLink from './ProfileLink';
 
-const Header = React.forwardRef((props, ref: React.Ref<HTMLElement>) => {
+const Header = React.forwardRef((_, ref: React.Ref<HTMLElement>) => {
   const [visibleMenu, setVisibleMenu] = React.useState(false);
 
   const clickOnBurger = () => {

@@ -14,13 +14,11 @@ interface IUserInfo {
 export const userRegister = createAsyncThunk<boolean, IUserInfo>(
   'user/register',
   async (userData, { dispatch }) => {
-    const response = await userAPI.post('/register', {
+    await userAPI.post('/register', {
       username: userData.username,
       email: userData.email,
       password: userData.password,
     });
-
-    const { user } = response.data;
 
     dispatch(
       setRegister({
