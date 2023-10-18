@@ -18,6 +18,12 @@
 
 ![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)![Yarn](https://img.shields.io/badge/yarn-%232C8EBB.svg?style=for-the-badge&logo=yarn&logoColor=white)![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 
+### Проект хостится на:
+
+![Render](https://img.shields.io/badge/Render-%46E3B7.svg?style=for-the-badge&logo=render&logoColor=white)
+
+При перезагрузке на **некорневых** страницах - будет пусто (недостаток).
+
 ---
 
 Ссылка на [Backend-часть](https://github.com/Lokusok/express-who-call)
